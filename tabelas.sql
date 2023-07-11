@@ -200,3 +200,12 @@ CREATE TABLE preescreve (
 );
 
 
+CREATE TABLE agenda (
+    cpf_atendente VARCHAR2(5),
+    cpf_paciente VARCHAR2(5),
+    data_agends DATE,
+
+    CONSTRAINT agenda_pk PRIMARY KEY (cpf_atendente, cpf_paciente, data_agends),
+    CONSTRAINT agenda_fk FOREIGN KEY (cpf_atendente) REFERENCES atendente (cpf_func)
+
+);
