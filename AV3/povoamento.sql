@@ -58,32 +58,33 @@ INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('84196','Lara Sou
 
 -- Telefone 
 INSERT INTO telefone (numero,cpf_fk) VALUES (81998765452,'12345');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819123456,'12135');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819789012,'45627');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819345678,'54642');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819890123,'67892');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819567890,'12735');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,'56894');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819901234,'73945');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819678901,'23956');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819012345,'32154');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819456789,'45087');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819765432,'98752');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819098765,'95173');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819123456,'34692');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819789012,'81703');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819345678,'52984');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819890123,'65317');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819567890,'42058');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,'13579');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819901234,'78624');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819678901,'93210');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819012345,'47163');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819456789,'65892');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819765432,'20387');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819098765,'57946');
 
 
-INSERT INTO telefone (numero,cpf_fk) VALUES (819017645,'15964');
-INSERT INTO telefone (numero,cpf_fk) VALUES (119957645,'89746');
-INSERT INTO telefone (numero,cpf_fk) VALUES (219654821,'25896');
-INSERT INTO telefone (numero,cpf_fk) VALUES (119963245,'74153');
-INSERT INTO telefone (numero,cpf_fk) VALUES (629486550,'75368');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819123456,'14796');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819789012,'15974');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819345678,'65489');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819890123,'99851');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819567890,'11443');
-INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,);
-INSERT INTO telefone (numero,cpf_fk) VALUES (819901234,'20328');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819017645,'78430');
+INSERT INTO telefone (numero,cpf_fk) VALUES (119957645,'21857');
+INSERT INTO telefone (numero,cpf_fk) VALUES (219654821,'93642');
+INSERT INTO telefone (numero,cpf_fk) VALUES (119963245,'40579');
+INSERT INTO telefone (numero,cpf_fk) VALUES (629486550,'72681');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819123456,'19435');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819789012,'86723');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819345678,'51076');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819890123,'30948');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819567890,'67512');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,'84196');
+
+
 
 -- Funcionario 
 
