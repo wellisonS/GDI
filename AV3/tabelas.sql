@@ -28,8 +28,6 @@ CREATE TABLE pessoa (
     SEXO CHAR,
     data_nascimento DATE NOT NULL,
     cep VARCHAR2(5) NOT NULL,
-    numero NUMBER NOT NULL, 
-    complemento VARCHAR2(255),
 
     CONSTRAINT pessoa_pkey PRIMARY KEY (cpf),
     CONSTRAINT pessoa_fkey FOREIGN KEY (cep) REFERENCES endereco (cep),
