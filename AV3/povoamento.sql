@@ -43,45 +43,47 @@ INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('65892','Lucas Ol
 INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('20387','Manuela Almeida Silva','F',to_date('1990-08-28','yyyy-mm-dd'),'98752');
 INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('57946','Enzo Costa Sousa','M',to_date('1983-01-03','yyyy-mm-dd'),'95173');
 
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('78430','Júlia Santos Lima','F',to_date('1996-09-22','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('21857','Bernardo Almeida Costa','M',to_date('1989-07-19','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('93642','Giovanna Sousa Silva','F',to_date('2002-02-14','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('40579','Miguel Lima Oliveira','M',to_date('1977-11-09','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('72681','Heloísa Costa Santos','F',to_date('1993-06-30','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('19435','Davi Almeida Sousa','M',to_date('1986-03-13','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('86723','Heitor Oliveira Silva','M',to_date('1999-12-18','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('51076','Maria Lima Costa','F',to_date('1980-05-06','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('30948','Laura Costa Sousa','F',to_date('1997-10-23','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('67512','Lorenzo Almeida Santos','M',to_date('1982-08-16','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('84196','Lara Sousa Costa','F',to_date('1991-04-02','yyyy-mm-dd'));
-INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('16320','Arthur Costa Oliveira','M',to_date('2003-11-27','yyyy-mm-dd'));
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('78430','Júlia Santos Lima','F',to_date('1996-09-22','yyyy-mm-dd'),'15964');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('21857','Bernardo Almeida Costa','M',to_date('1989-07-19','yyyy-mm-dd'),'89746');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('93642','Giovanna Sousa Silva','F',to_date('2002-02-14','yyyy-mm-dd'),'25896');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('40579','Miguel Lima Oliveira','M',to_date('1977-11-09','yyyy-mm-dd'),'74153');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('72681','Heloísa Costa Santos','F',to_date('1993-06-30','yyyy-mm-dd'),'75368');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('19435','Davi Almeida Sousa','M',to_date('1986-03-13','yyyy-mm-dd'),'14796');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('86723','Heitor Oliveira Silva','M',to_date('1999-12-18','yyyy-mm-dd'),'15974');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('51076','Maria Lima Costa','F',to_date('1980-05-06','yyyy-mm-dd'),'65489');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('30948','Laura Costa Sousa','F',to_date('1997-10-23','yyyy-mm-dd'),'99851');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('67512','Lorenzo Almeida Santos','M',to_date('1982-08-16','yyyy-mm-dd'),'11443');
+INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep) VALUES ('84196','Lara Sousa Costa','F',to_date('1991-04-02','yyyy-mm-dd'),'20328');
+
 
 -- Telefone 
-INSERT INTO telefone (numero,cpf_fk) VALUES (40028922,'12345');
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
-INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES (81998765452,'12345');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819123456,'12135');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819789012,'45627');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819345678,'54642');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819890123,'67892');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819567890,'12735');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,'56894');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819901234,'73945');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819678901,'23956');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819012345,'32154');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819456789,'45087');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819765432,'98752');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819098765,'95173');
+
+
+INSERT INTO telefone (numero,cpf_fk) VALUES (819017645,'15964');
+INSERT INTO telefone (numero,cpf_fk) VALUES (119957645,'89746');
+INSERT INTO telefone (numero,cpf_fk) VALUES (219654821,'25896');
+INSERT INTO telefone (numero,cpf_fk) VALUES (119963245,'74153');
+INSERT INTO telefone (numero,cpf_fk) VALUES (629486550,'75368');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819123456,'14796');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819789012,'15974');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819345678,'65489');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819890123,'99851');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819567890,'11443');
+INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,);
+INSERT INTO telefone (numero,cpf_fk) VALUES (819901234,'20328');
 
 -- Funcionario 
 
