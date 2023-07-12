@@ -56,7 +56,31 @@ INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep,numero,complemento) VALUES
 INSERT INTO pessoa (cpf,nome,SEXO,data_nascimento,cep,numero,complemento) VALUES ()
 
 -- Telefone 
-
+INSERT INTO telefone (numero,cpf_fk) VALUES (40028922,'12345');
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
+INSERT INTO telefone (numero,cpf_fk) VALUES ();
 
 -- Funcionario 
 
