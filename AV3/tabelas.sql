@@ -154,7 +154,7 @@ CREATE TABLE medicamento (
     nome_medicamento VARCHAR2 (255),
 
     CONSTRAINT medicamento_pk PRIMARY KEY (dosagem,nome_medicamento),
-    CONSTRAINT medicamento_fk FOREIGN KEY (nome_medicamento) REFERENCES tarja_medicamento (nome)
+    CONSTRAINT medicamento_fk FOREIGN KEY (nome_medicamento) REFERENCES tarja_medicamento (nome_med)
 
 
 );
