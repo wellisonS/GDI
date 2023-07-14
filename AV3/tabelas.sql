@@ -1,18 +1,16 @@
 -- Check List
 --CREATE TABLE (OK)
---INSERT INTO 
+--INSERT INTO (OK)
 --CLÁUSULA CONSTRAINT EM CREATE TABLE (OK)
---CREATE SEQUENCE 
+--CREATE SEQUENCE (OK)
 --CLÁUSULA CHECK EM CREATE TABLE  (OK)
 
 
 
 CREATE TABLE endereco (
-    numero NUMBER NOT NULL,
     estado VARCHAR2(50) NOT NULL,
     cidade VARCHAR2(50) NOT NULL,
     rua VARCHAR2(50) NOT NULL,
-    complemento VARCHAR2(50),
     cep VARCHAR2(5),
 
     CONSTRAINT endereco_pkey PRIMARY KEY (cep)
@@ -28,6 +26,8 @@ CREATE TABLE pessoa (
     SEXO CHAR,
     data_nascimento DATE NOT NULL,
     cep VARCHAR2(5) NOT NULL,
+    numero NUMBER NOT NULL,
+    complemento VARCHAR2(50),
 
     CONSTRAINT pessoa_pkey PRIMARY KEY (cpf),
     CONSTRAINT pessoa_fkey FOREIGN KEY (cep) REFERENCES endereco (cep),
@@ -60,7 +60,7 @@ CREATE TABLE salario (
     cargo VARCHAR2 (50),
     cpf_func VARCHAR2(5),
     salario NUMBER NOT NULL,
-    CONSTRAINT salario_pk PRIMARY KEY (cargo, cpf_func),
+    CONSTRAINT salario_pk PRIMARY KEY (cargo),
     CONSTRAINT salario_fk FOREIGN KEY (cpf_func) REFERENCES funcionario(cpf_fk)
 
 );
