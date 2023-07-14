@@ -94,6 +94,21 @@ INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,'84196');
 
 
 -- Funcionario 
+insert into funcionario values ('12345');
+insert into funcionario values ('34692');
+insert into funcionario values ('81703');
+insert into funcionario values ('52984');
+insert into funcionario values ('65317');
+insert into funcionario values ('42058');
+insert into funcionario values ('13579');
+insert into funcionario values ('78624');
+insert into funcionario values ('93210');
+insert into funcionario values ('47163');
+insert into funcionario values ('65892');
+insert into funcionario values ('20387');
+insert into funcionario values ('57946');
+insert into funcionario values ('78430');
+insert into funcionario values ('21857');
 
 
 -- Salario 
@@ -112,7 +127,11 @@ INSERT INTO telefone (numero,cpf_fk) VALUES (819234567,'84196');
 
 
 -- Paciente 
-
+insert into paciente values('93642','Sulamerica');
+insert into paciente values('40579','Unimed');
+insert into paciente values('72681','Hapvida');
+insert into paciente values('19435','Amil');
+insert into paciente values('86723','Bradesco');
 -- Dados Acompanhante 
 
 
