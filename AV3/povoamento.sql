@@ -112,7 +112,9 @@ insert into funcionario values ('21857');
 
 
 -- Salario 
-
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Médico','12345',8000);
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Atendente','65892',3000);
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Enfermeiro','42058',5000);
 
 -- Médico 
 
