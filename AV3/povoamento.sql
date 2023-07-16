@@ -123,9 +123,18 @@ INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Enfermeiro','42058',5000);
 
 
 -- Enfermeiro 
-
+INSERT INTO enfermeiro(cpf_func,coren) VALUES ('42058','18705');
+INSERT INTO enfermeiro(cpf_func,coren) VALUES ('13579','58176');
+INSERT INTO enfermeiro(cpf_func,coren) VALUES ('78624','10251');
+INSERT INTO enfermeiro(cpf_func,coren) VALUES ('93210','56705');
+INSERT INTO enfermeiro(cpf_func,coren) VALUES ('47163','77517');
 
 -- Atendente 
+INSERT INTO atendente(cpf_func) VALUES ('65892');
+INSERT INTO atendente(cpf_func) VALUES ('20387');
+INSERT INTO atendente(cpf_func) VALUES ('57946');
+INSERT INTO atendente(cpf_func) VALUES ('78430');
+INSERT INTO atendente(cpf_func) VALUES ('21857');
 
 
 -- Paciente 
