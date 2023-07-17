@@ -161,10 +161,18 @@ insert into paciente values('86723','Bradesco');
 
 
 -- Tarja Medicamento
-
+INSERT INTO tarja_medicamento (tarja, nome_med) VALUES ('Amarela', 'Ibuprofeno');
+INSERT INTO tarja_medicamento (tarja, nome_med) VALUES ('Vermelha', 'Buscopan');
+INSERT INTO tarja_medicamento (tarja, nome_med) VALUES ('Amarela', 'Paracetamol');
+INSERT INTO tarja_medicamento (tarja, nome_med) VALUES ('Preta', 'Morfina');
+INSERT INTO tarja_medicamento (tarja, nome_med) VALUES ('Preta', 'Diazepam');
 
 -- Medicamento 
-
+INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('600 mg', 'Ibuprofeno');
+INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('10 mg', 'Buscopan');
+INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('500 mg', 'Paracetamol');
+INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('30 mg', 'Morfina');
+INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('10 mg', 'Diazepam');
 
 -- ******************************************************************************
 
