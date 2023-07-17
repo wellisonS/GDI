@@ -115,6 +115,8 @@ insert into funcionario values ('21857');
 INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Médico','12345',8000);
 INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Atendente','65892',3000);
 INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Enfermeiro','42058',5000);
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Pediatra','34692',10000)
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Ginegologista','65317',10000)
 
 -- Médico 
 INSERT INTO medico(cpf_func, cpf_lider) VALUES ('12345','12345');
@@ -124,11 +126,11 @@ INSERT INTO medico(cpf_func, cpf_lider) VALUES ('52984','52984');
 INSERT INTO medico(cpf_func, cpf_lider) VALUES ('65317','52984');
 
 -- Especializacao 
-INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('CRM/SP 123456', 'Cirurgia Geral', '12345');
-INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('CRM/RJ 788743', 'Pediatria', '34692');
-INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('CRM/PE 314638', 'Anestesiologia', '81703');
-INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('CRM/RS 413624', 'Clínica Médica', '52984');
-INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('CRM/PB 445678', 'Ginecologia', '65317');
+INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('12345', 'Cirurgia Geral', '12345');
+INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('78873', 'Pediatria', '34692');
+INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('31438', 'Anestesiologia', '81703');
+INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('41624', 'Clínica Médica', '52984');
+INSERT INTO especializacao(crm, especializacao, cpf_medico) VALUES ('45678', 'Ginecologia', '65317');
 
 
 -- Enfermeiro 
