@@ -115,8 +115,8 @@ insert into funcionario values ('21857');
 INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Médico','12345',8000);
 INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Atendente','65892',3000);
 INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Enfermeiro','42058',5000);
-INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Pediatra','34692',10000)
-INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Ginegologista','65317',10000)
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Pediatra','34692',10000);
+INSERT INTO salario (cargo,cpf_func,salario) VALUES ('Ginegologista','65317',10000);
 
 -- Médico 
 INSERT INTO medico(cpf_func, cpf_lider) VALUES ('12345','12345');
@@ -155,10 +155,17 @@ insert into paciente values('72681','Hapvida');
 insert into paciente values('19435','Amil');
 insert into paciente values('86723','Bradesco');
 -- Dados Acompanhante 
+INSERT INTO dados_acompanhante (nome, cpf_acompanhante) VALUES ('Maria Lima Costa','51076');
+INSERT INTO dados_acompanhante (nome, cpf_acompanhante) VALUES ('Laura Costa Sousa','30948');
+INSERT INTO dados_acompanhante (nome, cpf_acompanhante) VALUES ('Lorenzo Almeida Santos','67512');
+INSERT INTO dados_acompanhante (nome, cpf_acompanhante) VALUES ('Lara Sousa Costa','84196');
 
 
 -- Acompanhante 
-
+INSERT INTO acompanhante (cpf_acompanhante_fk,cpf_pac) VALUES ('51076','93642');
+INSERT INTO acompanhante (cpf_acompanhante_fk,cpf_pac) VALUES('30948','40579');
+INSERT INTO acompanhante (cpf_acompanhante_fk,cpf_pac) VALUES('67512','72681');
+INSERT INTO acompanhante (cpf_acompanhante_fk,cpf_pac) VALUES('84196','19435');
 
 -- Tarja Medicamento
 INSERT INTO tarja_medicamento (tarja, nome_med) VALUES ('Amarela', 'Ibuprofeno');
