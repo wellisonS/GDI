@@ -186,12 +186,25 @@ INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('10 mg', 'Diazepam')
 -- RELACIONAMENTOS 
 
 -- Cirurgia 
-
+INSERT INTO cirurgia (cpf_medico,cpf_enfermeiro,data_cirurgia,cpf_paciente) VALUES ('12345','42058',to_date('2022-04-02','yyyy-mm-dd'),'93642');
+INSERT INTO cirurgia (cpf_medico,cpf_enfermeiro,data_cirurgia,cpf_paciente) VALUES ('12345','42058',to_date('2022-07-03','yyyy-mm-dd'),'40579');
+INSERT INTO cirurgia (cpf_medico,cpf_enfermeiro,data_cirurgia,cpf_paciente) VALUES ('12345','13579',to_date('2023-01-05','yyyy-mm-dd'),'93642');
+INSERT INTO cirurgia (cpf_medico,cpf_enfermeiro,data_cirurgia,cpf_paciente) VALUES ('12345','93210',to_date('2021-10-22','yyyy-mm-dd'),'72681');
+INSERT INTO cirurgia (cpf_medico,cpf_enfermeiro,data_cirurgia,cpf_paciente) VALUES ('12345','42058',to_date('2022-05-03','yyyy-mm-dd'),'19435');
 
 -- Medico-Paciente 
-
+INSERT INTO medico_paciente (cpf_medico,cpf_paciente,data_atendimento) VALUES ('52984','86723',to_date('2022-04-02','yyyy-mm-dd'));
+INSERT INTO medico_paciente (cpf_medico,cpf_paciente,data_atendimento) VALUES ('34692','86723',to_date('2022-10-02','yyyy-mm-dd'));
+INSERT INTO medico_paciente (cpf_medico,cpf_paciente,data_atendimento) VALUES ('65317','72681',to_date('2022-07-22','yyyy-mm-dd'));
+INSERT INTO medico_paciente (cpf_medico,cpf_paciente,data_atendimento) VALUES ('52984','19435',to_date('2021-11-12','yyyy-mm-dd'));
+INSERT INTO medico_paciente (cpf_medico,cpf_paciente,data_atendimento) VALUES ('52984','93642',to_date('2021-10-17','yyyy-mm-dd'));
 
 -- Preescreve
-
+INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','86723',to_date('2022-04-02','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
 
 -- Agenda
+INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
+INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
+INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
+INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
+INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
