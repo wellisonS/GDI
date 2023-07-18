@@ -201,7 +201,8 @@ INSERT INTO medico_paciente (cpf_medico,cpf_paciente,data_atendimento) VALUES ('
 
 -- Preescreve
 INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','86723',to_date('2022-04-02','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
-
+INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES();
+INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES();
 -- Agenda
 INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
 INSERT INTO agenda (cpf_atendente,cpf_paciente,data_agends) VALUES ();
