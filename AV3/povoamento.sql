@@ -181,6 +181,15 @@ INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('500 mg', 'Paracetam
 INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('30 mg', 'Morfina');
 INSERT INTO medicamento (dosagem, nome_medicamento) VALUES ('10 mg', 'Diazepam');
 
+
+-- Prontuario 
+
+INSERT INTO prontuario (cpf_paciente,altura,pressao,peso,temperatura) VALUES ('93642','1.75','13/2','87kg','36°C');
+INSERT INTO prontuario (cpf_paciente,altura,pressao,peso,temperatura) VALUES ('40579','1.40','10/6','50kg','35°C');
+INSERT INTO prontuario (cpf_paciente,altura,pressao,peso,temperatura) VALUES ('72681','1.57','12/8','60kg','39°C');
+INSERT INTO prontuario (cpf_paciente,altura,pressao,peso,temperatura) VALUES ('19435','1.92','13/8','120kg','38°C');
+INSERT INTO prontuario (cpf_paciente,altura,pressao,peso,temperatura) VALUES ('86723','1.65','14/9','90kg','37°C');
+
 -- ******************************************************************************
 
 -- RELACIONAMENTOS 
