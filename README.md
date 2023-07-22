@@ -4,5 +4,5 @@
 [Carlos Clark](https://github.com/cemc-git)  
 [Isaac Ferreira](https://github.com/ifs55) 
 [Matheus Barney](https://github.com/matheusbarney)  
-[Vlademir Melor](https://github.com/VladeMelo)  
+[Vlademir Melo](https://github.com/VladeMelo)  
 [Wellison Silva](https://github.com/wellisonS)
