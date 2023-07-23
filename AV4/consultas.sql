@@ -62,6 +62,31 @@ REVOKE DELETE ON medico FROM PUBLIC;
 
 SELECT cpf_func FROM atendente UNION SELECT cpf_func FROM enfermeiro;
 
+
+-- IS NOT NULL
+-- seleciona os prontuários que não possuem NULL como valor do peso
+SELECT peso FROM prontuario
+WHERE peso IS NOT NULL;
+
+
+-- LIKE
+-- seleciona as pessoas que tenham "Costa" no nome
+SELECT nome FROM pessoa
+WHERE nome LIKE '%Costa%';
+
+
+-- SELECT-FROM-WHERE
+-- seleciona os salários maiores que 7000
+SELECT salario FROM salario
+WHERE salario > 7000;
+
+
+-- SUBCONSULTA COM OPERADOR RELACIONAL
+-- seleciona os detalhes da tabela salário referente aos funcionários que possuam seu cpf ligado a tabela de médicos
+SELECT cargo, cpf_func, salario FROM salario
+WHERE cpf_func IN (SELECT cpf_func FROM medico);
+
+
 -- Consultas PL/SQL
 
 
@@ -187,6 +212,56 @@ BEGIN
 END;
 
 
+-- EXCEPTION WHEN
+-- procura se há uma determinada nome na tabela "pessoa"
+DECLARE
+    v_nome pessoa.nome%TYPE := 'Clodoaldo Ruiz Dias';
+BEGIN
+    -- consulta para obter os detalhes da pessoa
+    SELECT nome, cpf INTO v_nome FROM pessoa WHERE nome = v_nome;
+    DBMS_OUTPUT.PUT_LINE('Nome da pessoa: ' || v_nome);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        -- tratamento da exceção quando a pessoa não for encontrado na tabela
+        DBMS_OUTPUT.PUT_LINE('Pessoa não encontrada na tabela!');
+    WHEN OTHERS THEN
+        -- tratamento de outras exceções não previstas
+        DBMS_OUTPUT.PUT_LINE('Erro inesperado: ' || SQLERRM);
+END;
 
 
+-- CREATE OR REPLACE PACKAGE
+-- pacote que tem uma função onde retorna o nome e o cep da pessoa a partir do seu cpf
+CREATE OR REPLACE PACKAGE PessoaPackage AS
+    -- declaração do tipo de dado RECORD para representar os detalhes de uma pessoa
+    TYPE PessoaRecord IS RECORD (
+        cpf            VARCHAR2(5),
+        nome           VARCHAR2(255),
+        cep            VARCHAR2(5)
+    );
 
+    -- declaração da função para obter o nome e cep da pessoa pelo cpf
+    FUNCTION GetNomeECep(cpf IN VARCHAR2) RETURN PessoaRecord;
+END PessoaPackage;
+
+
+-- USO DE RECORD
+-- implementação da função "GetNomeECep" dentro do pacote
+CREATE OR REPLACE PACKAGE BODY PessoaPackage AS
+    -- implementação da função para obter os detalhes da pessoa pelo cpf
+    FUNCTION GetNomeECep(cpf IN VARCHAR2) RETURN PessoaRecord IS
+        pessoa_details PessoaRecord;
+    BEGIN
+        SELECT cpf, nome, cep INTO pessoa_details FROM pessoa
+        WHERE cpf = cpf;
+
+        RETURN pessoa_details;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            -- tratamento da exceção quando a pessoa não for encontrada na tabela
+            pessoa_details.cpf := 'CPF não encontrado';
+            pessoa_details.nome := '';
+            pessoa_details.cep := '';
+            RETURN pessoa_details;
+    END GetNomeECep;
+END PessoaPackage;
