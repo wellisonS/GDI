@@ -2,8 +2,8 @@
 
 
 -- INSERT
-INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','93642',to_date('2021-10-17','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas')
-INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','19435',to_date('2021-11-12','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas')
+INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','93642',to_date('2021-10-17','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
+INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','19435',to_date('2021-11-12','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
 
 
 -- DELETE
@@ -11,29 +11,31 @@ DELETE FROM agenda WHERE agenda.cpf_paciente = '86723';
 
 
 -- GROUP BY
+-- retorna a distribuição de pessoas por cep, em cada cidade.
 SELECT cidade, COUNT(cep) as total FROM endereco
 GROUP BY cidade;
--- retorna a distribuição de pessoas por cep, em cada cidade.
-
 
 -- BETWEEN
+-- retorna o cpf das pessoas que ganham entre 3000 e 7000 reais de salário.
 SELECT cpf_func, salario FROM salario
 WHERE salario.salario BETWEEN '3000' and '7000';
--- retorna o cpf das pessoas que ganham entre 3000 e 7000 reais de salário.
+
 
 
 -- UPDATE
+-- atualiza o nome de uma pessoa pelo cpf.
 UPDATE pessoa SET nome = 'Júlia Caroline Maciel'
 WHERE cpf ='42058';
--- atualiza o nome de uma pessoa pelo cpf.
+
 
 
 --INNER JOIN
+-- junta as duas tabelas, pessoa e endereco, a partir da cláusula cep.
 SELECT pessoa.numero, pessoa.cpf, pessoa.nome, pessoa.SEXO, pessoa.data_nascimento,
 endereco.estado, endereco.cidade, endereco.rua, endereco.cep, pessoa.complemento
 FROM pessoa
 INNER JOIN endereco ON pessoa.cep = endereco.cep;
--- junta as duas tabelas, pessoa e endereco, a partir da cláusula cep.
+
 
 
 
