@@ -36,9 +36,31 @@ endereco.estado, endereco.cidade, endereco.rua, endereco.cep, pessoa.complemento
 FROM pessoa
 INNER JOIN endereco ON pessoa.cep = endereco.cep;
 
+-- MAX 
+-- Retorna os salários máximos de cada cargo
+SELECT cargo, MAX(salario) AS max_salario
+FROM salario
+GROUP BY cargo
+
+-- FULL OUTER JOIN 
+-- Retorna o endereco do funcionário de cpf = '93210'
+SELECT e.estado, e.cidade, e.cep,e.rua,p.nome, p.complemento,p.numero
+FROM funcionario f
+FULL OUTER JOIN pessoa p ON f.cpf_fk = p.cpf
+FULL OUTER JOIN endereco e ON p.cep = e.cep
+WHERE f.cpf_fk = '93210';
+
+-- GRANT/ REVOKE 
+-- Garante todos os privilegios sobre a tabela médico 
+GRANT ALL PRIVILEGES ON medico TO PUBLIC;
+-- Não permite que  o privilegio de deletar seja público
+REVOKE DELETE ON medico FROM PUBLIC;
 
 
+-- Uniou ou Intersect ou minus
+-- mostra os dados de todos os funionários que não são médicos
 
+SELECT cpf_func FROM atendente UNION SELECT cpf_func FROM enfermeiro;
 
 -- Consultas PL/SQL
 
