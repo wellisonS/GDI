@@ -42,6 +42,13 @@ SELECT cargo, MAX(salario) AS max_salario
 FROM salario
 GROUP BY cargo
 
+-- MIN 
+-- Retorna os salários mínimos de cada cargo
+SELECT cargo, MIN(salario) AS min_salario
+FROM salario
+GROUP BY cargo
+
+
 -- FULL OUTER JOIN 
 -- Retorna o endereco do funcionário de cpf = '93210'
 SELECT e.estado, e.cidade, e.cep,e.rua,p.nome, p.complemento,p.numero
@@ -80,12 +87,21 @@ WHERE nome LIKE '%Costa%';
 SELECT salario FROM salario
 WHERE salario > 7000;
 
+-- IN
+-- in possibilita especificar valores múltiplos em uma clausula WHERE
+--selecionar pessoas especializadas em cirurgia geral e anestesiologia
+SELECT especializacao FROM especializacao
+WHERE especializacao IN ('Cirurgia Geral', 'Anestesiologia');
 
 -- SUBCONSULTA COM OPERADOR RELACIONAL
 -- seleciona os detalhes da tabela salário referente aos funcionários que possuam seu cpf ligado a tabela de médicos
 SELECT cargo, cpf_func, salario FROM salario
 WHERE cpf_func IN (SELECT cpf_func FROM medico);
 
+-- SUBCONSULTA COM ANY
+-- seleciona os detalhes da tabela salário referente aos funcionários que possuam seu cpf ligado a tabela de atendente
+SELECT cargo, cpf_func, salario FROM salario 
+WHERE salario = ANY (SELECT cpf_func FROM atendente);
 
 -- Consultas PL/SQL
 
@@ -306,3 +322,11 @@ BEGIN
   CLOSE v_cursor;
 END;
 /
+
+-- CREATE VIEW
+-- criar uma tabela virtual de médicos pediatras, baseada na tabela real
+CREATE VIEW [Pediatras] AS
+SELECT crm, cpf_medico
+FROM medico
+WHERE especializacao = 'Pediatra';
+>>>>>>> Stashed changes
