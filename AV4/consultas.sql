@@ -265,3 +265,44 @@ CREATE OR REPLACE PACKAGE BODY PessoaPackage AS
             RETURN pessoa_details;
     END GetNomeECep;
 END PessoaPackage;
+
+
+-- WHILE 
+
+DECLARE
+  -- Declaração de variáveis para armazenar os dados de todas pessoas e seus salários
+  v_nome pessoa.nome%TYPE;
+  v_cargo salario.cargo%TYPE;
+  v_salario salario.salario%TYPE;
+  v_cursor SYS_REFCURSOR; -- Cursor para armazenar os dados da tabela
+BEGIN
+  -- Abrindo o cursor com os dados da tabela "pessoa"
+  OPEN v_cursor FOR
+    SELECT P.nome, S.cargo, S.salario FROM salario  S,
+    PESSOA P WHERE P.cpf = S.cpf_func;
+    
+
+  -- Inicializando as variáveis
+  v_nome := '';
+  v_cargo := '';
+  v_salario := 0;
+
+  -- Loop para percorrer os registros das tabelas utilizando WHILE
+  WHILE TRUE LOOP
+    -- Lendo os dados do cursor para as variáveis
+    FETCH v_cursor INTO v_nome, v_cargo, v_salario;
+
+    -- Saindo do loop quando não houver mais registros
+    EXIT WHEN v_cursor%NOTFOUND;
+
+    -- Condição para filtrar os salários maiores que 8000
+    IF v_salario >= 8000 THEN
+      -- Exibindo os dados das pessoa cujos salários são maiores que 8000
+      DBMS_OUTPUT.PUT_LINE('Nome: ' || v_nome || ', Cargo: ' || v_cargo || ', Salário: ' || v_salario);
+    END IF;
+  END LOOP;
+
+  -- Fechando o cursor
+  CLOSE v_cursor;
+END;
+/
