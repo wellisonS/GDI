@@ -101,6 +101,25 @@ WHERE cpf_func IN (SELECT cpf_func FROM medico);
 SELECT cargo, cpf_func, salario FROM salario 
 WHERE salario = ANY (SELECT cpf_func FROM atendente);
 
+-- CONSULTA UTILIZANDO O HAVING e AVG
+-- retorna o cargo e a média salarial dos funcionários cujo salário médio é maior ou igual a 5000
+SELECT cargo, AVG(salario) AS media_salario
+FROM salario
+GROUP BY cargo
+HAVING AVG(salario) >= 5000;
+
+
+-- CONSULTA UTILIZANDO O CREATE INDEX
+-- Cria um índice chamado idx_pessoa_cpf na tabela pessoa com base na coluna cpf.
+CREATE INDEX idx_pessoa_cpf ON pessoa (cpf);
+
+
+-- Adiciona uma nova coluna chamada "email" à tabela "pessoa"
+ALTER TABLE pessoa
+ADD email VARCHAR2(100);
+
+
+
 -- Consultas PL/SQL
 
 
@@ -321,6 +340,83 @@ BEGIN
 END;
 /
 
+-- PROCEDURE
+  
+-- Criação de uma procedure que retorna o nome e o CPF de uma pessoa a partir do seu código
+CREATE OR REPLACE PROCEDURE GetNomeECPF (
+    p_codigo IN NUMBER,
+    p_nome OUT VARCHAR2,
+    p_cpf OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT nome, cpf INTO p_nome, p_cpf
+    FROM pessoa
+    WHERE codigo = p_codigo;
+END;
+/
+
+--CREATE OR REPLACE TRIGGER (LINHA)
+
+
+-- Criação de um trigger que atualiza a data de modificação sempre que uma linha da tabela pessoa é atualizada.
+CREATE OR REPLACE TRIGGER pessoa_after_update
+AFTER UPDATE ON pessoa
+FOR EACH ROW
+BEGIN
+    UPDATE pessoa
+    SET data_modificacao = SYSDATE
+    WHERE codigo = :OLD.codigo;
+END;
+/
+
+
+--CREATE OR REPLACE TRIGGER (COMANDO)
+
+-- Criação de um trigger que valida a inserção de um novo funcionário para garantir que o salário seja maior que 2000.
+CREATE OR REPLACE TRIGGER valida_salario_funcionario
+BEFORE INSERT ON funcionario
+FOR EACH ROW
+DECLARE
+    salario_minimo NUMBER := 2000;
+BEGIN
+    IF :NEW.salario < salario_minimo THEN
+        RAISE_APPLICATION_ERROR(-20001, 'O salário do funcionário deve ser maior que ' || salario_minimo);
+    END IF;
+END;
+/
+
+--Consulta utilizando ALL como subconsulta e order by
+--Está pegando o nome das pessoas que estão participando da cirurgia e acima da data de 03/05/2022
+select p.nome as paciente, p2.nome as medico, p3.nome as enfermeiro,c.data_cirurgia from cirurgia c
+join pessoa p on c.cpf_paciente = p.cpf
+join pessoa p2 on c.cpf_medico = p2.cpf
+join pessoa p3 on c.cpf_enfermeiro =p3.cpf
+where c.data_cirurgia > all(select data_cirurgia from cirurgia
+    							where data_cirurgia <= to_date('2022-05-03','yyyy-mm-dd'))
+order by c.data_cirurgia asc;
+
+--Consulta utilizando count, adquirindo a quantidade de cada cirurgias feitas por cada médico
+select p.nome,cpf_func as cpf_medico, count(data_cirurgia) as numero_cirurgias_feitas from cirurgia c
+right join medico m on c.cpf_medico = m.cpf_func
+join pessoa p on m.cpf_func = p.cpf
+group by m.cpf_func, p.nome;
+
+--Consulta que lista os pacientes na qual o prontuário informa que está com febre
+--utilizando in como subconsulta
+select p.nome, p.cpf, pr.temperatura from pessoa p
+join prontuario pr on p.cpf = pr.cpf_paciente
+where p.cpf in(select cpf_paciente from prontuario
+    			where temperatura >= '37°C');
+
+--Bloco anonimo + %rowtype, printa na tela informacoes sobre a cirurgia do paciente de cpf 19435
+declare
+cirurgia_pac cirurgia%rowtype;
+begin
+select * into cirurgia_pac from cirurgia where cpf_paciente = '19435';
+dbms_output.put_line('Cpf medico: '||cirurgia_pac.cpf_medico||' Cpf enfermeiro: '|| cirurgia_pac.cpf_enfermeiro||' Cpf paciente: '|| cirurgia_pac.cpf_paciente||' Data da cirurgia: ' ||cirurgia_pac.data_cirurgia);
+end;
+/
 -- CREATE VIEW
 -- criar uma tabela virtual de médicos pediatras, baseada na tabela real
 CREATE VIEW [Pediatras] AS
