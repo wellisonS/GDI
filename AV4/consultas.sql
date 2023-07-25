@@ -1,10 +1,8 @@
 -- Consultas SQL
 
-
 -- INSERT
 INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','93642',to_date('2021-10-17','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
 INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','19435',to_date('2021-11-12','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
-
 
 -- DELETE
 DELETE FROM agenda WHERE agenda.cpf_paciente = '86723';
@@ -329,4 +327,30 @@ CREATE VIEW [Pediatras] AS
 SELECT crm, cpf_medico
 FROM medico
 WHERE especializacao = 'Pediatra';
->>>>>>> Stashed changes
+
+-- CREATE TABLE
+-- cria uma tabela com o médico honrado do mês
+CREATE TABLE honrado ( 
+    cpf_func VARCHAR2(5),
+    nome VARCHAR2(255) NOT NULL,
+    cpf_lider VARCHAR2(5)
+);
+INSERT INTO honrado(cpf_func, nome, cpf_lider) VALUES ('12345', 'Carlos da Silva Nascimento', '12345');
+
+--FOR IN LOOP
+-- seleciona 3 funcionarios aleatorios
+FOR i IN 1 .. 3
+LOOP
+    SELECT cpf_fk FROM funcionario
+    ORDER BY RAND ( )  
+    LIMIT 1  
+END LOOP;
+
+--CREATE FUNCTION
+--funcao que calcula os salarios em dolar
+CREATE FUNCTION ObterSalarioEmDolar (@salario int)
+RETURNS float
+    AS 
+    BEGIN
+        RETURN @salario * 4.75
+    END
