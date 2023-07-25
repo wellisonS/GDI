@@ -371,3 +371,35 @@ BEGIN
     END IF;
 END;
 /
+
+--Consulta utilizando ALL como subconsulta e order by
+--Está pegando o nome das pessoas que estão participando da cirurgia e acima da data de 03/05/2022
+select p.nome as paciente, p2.nome as medico, p3.nome as enfermeiro,c.data_cirurgia from cirurgia c
+join pessoa p on c.cpf_paciente = p.cpf
+join pessoa p2 on c.cpf_medico = p2.cpf
+join pessoa p3 on c.cpf_enfermeiro =p3.cpf
+where c.data_cirurgia > all(select data_cirurgia from cirurgia
+    							where data_cirurgia <= to_date('2022-05-03','yyyy-mm-dd'))
+order by c.data_cirurgia asc;
+
+--Consulta utilizando count, adquirindo a quantidade de cada cirurgias feitas por cada médico
+select p.nome,cpf_func as cpf_medico, count(data_cirurgia) as numero_cirurgias_feitas from cirurgia c
+right join medico m on c.cpf_medico = m.cpf_func
+join pessoa p on m.cpf_func = p.cpf
+group by m.cpf_func, p.nome;
+
+--Consulta que lista os pacientes na qual o prontuário informa que está com febre
+--utilizando in como subconsulta
+select p.nome, p.cpf, pr.temperatura from pessoa p
+join prontuario pr on p.cpf = pr.cpf_paciente
+where p.cpf in(select cpf_paciente from prontuario
+    			where temperatura >= '37°C');
+
+--Bloco anonimo + %rowtype, printa na tela informacoes sobre a cirurgia do paciente de cpf 19435
+declare
+cirurgia_pac cirurgia%rowtype;
+begin
+select * into cirurgia_pac from cirurgia where cpf_paciente = '19435';
+dbms_output.put_line('Cpf medico: '||cirurgia_pac.cpf_medico||' Cpf enfermeiro: '|| cirurgia_pac.cpf_enfermeiro||' Cpf paciente: '|| cirurgia_pac.cpf_paciente||' Data da cirurgia: ' ||cirurgia_pac.data_cirurgia);
+end;
+/
