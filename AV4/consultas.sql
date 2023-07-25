@@ -87,6 +87,25 @@ SELECT cargo, cpf_func, salario FROM salario
 WHERE cpf_func IN (SELECT cpf_func FROM medico);
 
 
+-- CONSULTA UTILIZANDO O HAVING e AVG
+-- retorna o cargo e a média salarial dos funcionários cujo salário médio é maior ou igual a 5000
+SELECT cargo, AVG(salario) AS media_salario
+FROM salario
+GROUP BY cargo
+HAVING AVG(salario) >= 5000;
+
+
+-- CONSULTA UTILIZANDO O CREATE INDEX
+-- Cria um índice chamado idx_pessoa_cpf na tabela pessoa com base na coluna cpf.
+CREATE INDEX idx_pessoa_cpf ON pessoa (cpf);
+
+
+-- Adiciona uma nova coluna chamada "email" à tabela "pessoa"
+ALTER TABLE pessoa
+ADD email VARCHAR2(100);
+
+
+
 -- Consultas PL/SQL
 
 
@@ -304,5 +323,51 @@ BEGIN
 
   -- Fechando o cursor
   CLOSE v_cursor;
+END;
+/
+
+-- PROCEDURE
+  
+-- Criação de uma procedure que retorna o nome e o CPF de uma pessoa a partir do seu código
+CREATE OR REPLACE PROCEDURE GetNomeECPF (
+    p_codigo IN NUMBER,
+    p_nome OUT VARCHAR2,
+    p_cpf OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT nome, cpf INTO p_nome, p_cpf
+    FROM pessoa
+    WHERE codigo = p_codigo;
+END;
+/
+
+--CREATE OR REPLACE TRIGGER (LINHA)
+
+
+-- Criação de um trigger que atualiza a data de modificação sempre que uma linha da tabela pessoa é atualizada.
+CREATE OR REPLACE TRIGGER pessoa_after_update
+AFTER UPDATE ON pessoa
+FOR EACH ROW
+BEGIN
+    UPDATE pessoa
+    SET data_modificacao = SYSDATE
+    WHERE codigo = :OLD.codigo;
+END;
+/
+
+
+--CREATE OR REPLACE TRIGGER (COMANDO)
+
+-- Criação de um trigger que valida a inserção de um novo funcionário para garantir que o salário seja maior que 2000.
+CREATE OR REPLACE TRIGGER valida_salario_funcionario
+BEFORE INSERT ON funcionario
+FOR EACH ROW
+DECLARE
+    salario_minimo NUMBER := 2000;
+BEGIN
+    IF :NEW.salario < salario_minimo THEN
+        RAISE_APPLICATION_ERROR(-20001, 'O salário do funcionário deve ser maior que ' || salario_minimo);
+    END IF;
 END;
 /
