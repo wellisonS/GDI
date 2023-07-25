@@ -15,7 +15,7 @@ GROUP BY cidade;
 
 -- BETWEEN
 -- retorna o cpf das pessoas que ganham entre 3000 e 7000 reais de salário.
-SELECT cpf_func, salario FROM salario
+SELECT cargo, salario FROM salario
 WHERE salario.salario BETWEEN '3000' and '7000';
 
 
@@ -88,7 +88,7 @@ WHERE salario > 7000;
 -- IN
 -- in possibilita especificar valores múltiplos em uma clausula WHERE
 --selecionar pessoas especializadas em cirurgia geral e anestesiologia
-SELECT especializacao FROM especializacao
+SELECT cpf_medico FROM especializacao
 WHERE especializacao IN ('Cirurgia Geral', 'Anestesiologia');
 
 -- SUBCONSULTA COM OPERADOR RELACIONAL
@@ -99,7 +99,7 @@ WHERE cpf_func IN (SELECT cpf_func FROM medico);
 -- SUBCONSULTA COM ANY
 -- seleciona os detalhes da tabela salário referente aos funcionários que possuam seu cpf ligado a tabela de atendente
 SELECT cargo, cpf_func, salario FROM salario 
-WHERE salario = ANY (SELECT cpf_func FROM atendente);
+WHERE cpf_func = ANY (SELECT cpf_func FROM atendente);
 
 -- CONSULTA UTILIZANDO O HAVING e AVG
 -- retorna o cargo e a média salarial dos funcionários cujo salário médio é maior ou igual a 5000
@@ -120,7 +120,38 @@ ADD email VARCHAR2(100);
 
 
 
--- Consultas PL/SQL
+--Consulta utilizando ALL como subconsulta e order by
+--Está pegando o nome das pessoas que estão participando da cirurgia  acima da data de 03/05/2022
+select p.nome as paciente, p2.nome as medico, p3.nome as enfermeiro,c.data_cirurgia from cirurgia c
+join pessoa p on c.cpf_paciente = p.cpf
+join pessoa p2 on c.cpf_medico = p2.cpf
+join pessoa p3 on c.cpf_enfermeiro =p3.cpf
+where c.data_cirurgia > all(select data_cirurgia from cirurgia
+    							where data_cirurgia <= to_date('2022-05-03','yyyy-mm-dd'))
+order by c.data_cirurgia asc;
+
+--Consulta utilizando count, adquirindo a quantidade de cada cirurgias feitas por cada médico
+select p.nome,cpf_func as cpf_medico, count(data_cirurgia) as numero_cirurgias_feitas from cirurgia c
+right join medico m on c.cpf_medico = m.cpf_func
+join pessoa p on m.cpf_func = p.cpf
+group by m.cpf_func, p.nome;
+
+--Consulta que lista os pacientes na qual o prontuário informa que está com febre
+--utilizando in como subconsulta
+select p.nome, p.cpf, pr.temperatura from pessoa p
+join prontuario pr on p.cpf = pr.cpf_paciente
+where p.cpf in(select cpf_paciente from prontuario
+    			where temperatura >= '37°C');
+
+
+-- CREATE VIEW
+-- criar uma tabela virtual de médicos pediatras, baseada na tabela real
+CREATE VIEW [Pediatras] AS
+SELECT crm, cpf_medico
+FROM medico
+WHERE especializacao = 'Pediatra';
+
+-- Consultas PL/SQL ***********************************************
 
 
 -- %Type e Select .. Into
@@ -142,8 +173,6 @@ END;
 
 
 -- CASE WHEN
-
-
 ---Atualiza todos os complementos que são nulos, para "sem informações"
 DECLARE
     v_numero pessoa.numero%TYPE;
@@ -173,7 +202,7 @@ BEGIN
 END;
 
 
--- CURSOR (OPEN, CLOSE, FETCH)
+-- CURSOR (OPEN, CLOSE, FETCH) e Loop Exit When
 -- retorna nome e sexo de todas as pessoas da tabela pessoa.
 
 DECLARE
@@ -251,7 +280,7 @@ DECLARE
     v_nome pessoa.nome%TYPE := 'Clodoaldo Ruiz Dias';
 BEGIN
     -- consulta para obter os detalhes da pessoa
-    SELECT nome, cpf INTO v_nome FROM pessoa WHERE nome = v_nome;
+    SELECT nome INTO v_nome FROM pessoa WHERE nome = v_nome;
     DBMS_OUTPUT.PUT_LINE('Nome da pessoa: ' || v_nome);
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
@@ -381,33 +410,12 @@ DECLARE
     salario_minimo NUMBER := 2000;
 BEGIN
     IF :NEW.salario < salario_minimo THEN
-        RAISE_APPLICATION_ERROR(-20001, 'O salário do funcionário deve ser maior que ' || salario_minimo);
+        RAISE_APPLICATION_ERROR(-20101, 'O salário do funcionário deve ser maior que ' || salario_minimo);
     END IF;
 END;
 /
 
---Consulta utilizando ALL como subconsulta e order by
---Está pegando o nome das pessoas que estão participando da cirurgia e acima da data de 03/05/2022
-select p.nome as paciente, p2.nome as medico, p3.nome as enfermeiro,c.data_cirurgia from cirurgia c
-join pessoa p on c.cpf_paciente = p.cpf
-join pessoa p2 on c.cpf_medico = p2.cpf
-join pessoa p3 on c.cpf_enfermeiro =p3.cpf
-where c.data_cirurgia > all(select data_cirurgia from cirurgia
-    							where data_cirurgia <= to_date('2022-05-03','yyyy-mm-dd'))
-order by c.data_cirurgia asc;
 
---Consulta utilizando count, adquirindo a quantidade de cada cirurgias feitas por cada médico
-select p.nome,cpf_func as cpf_medico, count(data_cirurgia) as numero_cirurgias_feitas from cirurgia c
-right join medico m on c.cpf_medico = m.cpf_func
-join pessoa p on m.cpf_func = p.cpf
-group by m.cpf_func, p.nome;
-
---Consulta que lista os pacientes na qual o prontuário informa que está com febre
---utilizando in como subconsulta
-select p.nome, p.cpf, pr.temperatura from pessoa p
-join prontuario pr on p.cpf = pr.cpf_paciente
-where p.cpf in(select cpf_paciente from prontuario
-    			where temperatura >= '37°C');
 
 --Bloco anonimo + %rowtype, printa na tela informacoes sobre a cirurgia do paciente de cpf 19435
 declare
@@ -423,6 +431,7 @@ CREATE VIEW [Pediatras] AS
 SELECT crm, cpf_medico
 FROM especializacao
 WHERE especializacao = 'Pediatra';
+
 
 -- CREATE TABLE
 -- cria uma tabela com o médico honrado do mês
