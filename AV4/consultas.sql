@@ -421,7 +421,7 @@ end;
 -- criar uma tabela virtual de médicos pediatras, baseada na tabela real
 CREATE VIEW [Pediatras] AS
 SELECT crm, cpf_medico
-FROM medico
+FROM especializacao
 WHERE especializacao = 'Pediatra';
 
 -- CREATE TABLE
