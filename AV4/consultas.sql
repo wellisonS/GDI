@@ -1,10 +1,8 @@
 -- Consultas SQL
 
-
 -- INSERT
 INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','93642',to_date('2021-10-17','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
 INSERT INTO preescreve (cpf_medico,cpf_paciente,data_atendimento,dosagem,nome_med,frequencia) VALUES ('52984','19435',to_date('2021-11-12','yyyy-mm-dd'),'10 mg','Buscopan','A cada 8 horas');
-
 
 -- DELETE
 DELETE FROM agenda WHERE agenda.cpf_paciente = '86723';
@@ -41,6 +39,13 @@ INNER JOIN endereco ON pessoa.cep = endereco.cep;
 SELECT cargo, MAX(salario) AS max_salario
 FROM salario
 GROUP BY cargo
+
+-- MIN 
+-- Retorna os salários mínimos de cada cargo
+SELECT cargo, MIN(salario) AS min_salario
+FROM salario
+GROUP BY cargo
+
 
 -- FULL OUTER JOIN 
 -- Retorna o endereco do funcionário de cpf = '93210'
@@ -80,12 +85,21 @@ WHERE nome LIKE '%Costa%';
 SELECT salario FROM salario
 WHERE salario > 7000;
 
+-- IN
+-- in possibilita especificar valores múltiplos em uma clausula WHERE
+--selecionar pessoas especializadas em cirurgia geral e anestesiologia
+SELECT especializacao FROM especializacao
+WHERE especializacao IN ('Cirurgia Geral', 'Anestesiologia');
 
 -- SUBCONSULTA COM OPERADOR RELACIONAL
 -- seleciona os detalhes da tabela salário referente aos funcionários que possuam seu cpf ligado a tabela de médicos
 SELECT cargo, cpf_func, salario FROM salario
 WHERE cpf_func IN (SELECT cpf_func FROM medico);
 
+-- SUBCONSULTA COM ANY
+-- seleciona os detalhes da tabela salário referente aos funcionários que possuam seu cpf ligado a tabela de atendente
+SELECT cargo, cpf_func, salario FROM salario 
+WHERE salario = ANY (SELECT cpf_func FROM atendente);
 
 -- CONSULTA UTILIZANDO O HAVING e AVG
 -- retorna o cargo e a média salarial dos funcionários cujo salário médio é maior ou igual a 5000
@@ -403,3 +417,36 @@ select * into cirurgia_pac from cirurgia where cpf_paciente = '19435';
 dbms_output.put_line('Cpf medico: '||cirurgia_pac.cpf_medico||' Cpf enfermeiro: '|| cirurgia_pac.cpf_enfermeiro||' Cpf paciente: '|| cirurgia_pac.cpf_paciente||' Data da cirurgia: ' ||cirurgia_pac.data_cirurgia);
 end;
 /
+-- CREATE VIEW
+-- criar uma tabela virtual de médicos pediatras, baseada na tabela real
+CREATE VIEW [Pediatras] AS
+SELECT crm, cpf_medico
+FROM medico
+WHERE especializacao = 'Pediatra';
+
+-- CREATE TABLE
+-- cria uma tabela com o médico honrado do mês
+CREATE TABLE honrado ( 
+    cpf_func VARCHAR2(5),
+    nome VARCHAR2(255) NOT NULL,
+    cpf_lider VARCHAR2(5)
+);
+INSERT INTO honrado(cpf_func, nome, cpf_lider) VALUES ('12345', 'Carlos da Silva Nascimento', '12345');
+
+--FOR IN LOOP
+-- seleciona 3 funcionarios aleatorios
+FOR i IN 1 .. 3
+LOOP
+    SELECT cpf_fk FROM funcionario
+    ORDER BY RAND ( )  
+    LIMIT 1  
+END LOOP;
+
+--CREATE FUNCTION
+--funcao que calcula os salarios em dolar
+CREATE FUNCTION ObterSalarioEmDolar (@salario int)
+RETURNS float
+    AS 
+    BEGIN
+        RETURN @salario * 4.75
+    END
