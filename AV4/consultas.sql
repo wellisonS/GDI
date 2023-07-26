@@ -371,33 +371,56 @@ END;
 
 -- PROCEDURE
   
--- Criação de uma procedure que retorna o nome e o CPF de uma pessoa a partir do seu código
-CREATE OR REPLACE PROCEDURE GetNomeECPF (
-    p_codigo IN NUMBER,
-    p_nome OUT VARCHAR2,
-    p_cpf OUT VARCHAR2
+-- Essa PROCEDURE irá retornar o nome do paciente e o plano de saúde associado.
+CREATE OR REPLACE PROCEDURE consultar_paciente_por_cpf(
+    p_cpf_paciente IN paciente.cpf_p%TYPE,
+    p_nome OUT paciente.nome%TYPE,
+    p_plano_saude OUT paciente.plano_de_saude%TYPE
 )
 AS
 BEGIN
-    SELECT nome, cpf INTO p_nome, p_cpf
-    FROM pessoa
-    WHERE codigo = p_codigo;
+    SELECT nome, plano_de_saude
+    INTO p_nome, p_plano_saude
+    FROM paciente
+    WHERE cpf_p = p_cpf_paciente;
+    
+    -- Se a consulta não retornar resultados, pode-se tratar uma exceção aqui.
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        -- Tratar a situação de paciente não encontrado, se necessário.
+        p_nome := NULL;
+        p_plano_saude := NULL;
 END;
 /
+
+
 
 --CREATE OR REPLACE TRIGGER (LINHA)
 
 
--- Criação de um trigger que atualiza a data de modificação sempre que uma linha da tabela pessoa é atualizada.
-CREATE OR REPLACE TRIGGER pessoa_after_update
-AFTER UPDATE ON pessoa
+-- Essa TRIGGER verificará a idade do paciente a ser inserido e permitirá a inserção apenas se a idade for maior ou igual a 18 anos.
+CREATE OR REPLACE TRIGGER tr_verificar_idade_paciente
+BEFORE INSERT ON paciente
 FOR EACH ROW
+DECLARE
+    v_idade NUMBER;
 BEGIN
-    UPDATE pessoa
-    SET data_modificacao = SYSDATE
-    WHERE codigo = :OLD.codigo;
+    -- Calcular a idade do paciente a ser inserido
+    SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, :NEW.data_nascimento) / 12)
+    INTO v_idade
+    FROM DUAL;
+
+    -- Verificar se a idade é menor que 18 anos
+    IF v_idade < 18 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'A idade do paciente deve ser maior ou igual a 18 anos.');
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE;
 END;
 /
+
 
 
 --CREATE OR REPLACE TRIGGER (COMANDO)
