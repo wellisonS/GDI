@@ -111,7 +111,7 @@ HAVING AVG(salario) >= 5000;
 
 -- CONSULTA UTILIZANDO O CREATE INDEX
 -- Cria um índice chamado idx_pessoa_cpf na tabela pessoa com base na coluna cpf.
-CREATE INDEX idx_pessoa_cpf ON pessoa (cpf);
+CREATE index idx_pessoa_nome on pessoa(nome);
 
 
 -- Adiciona uma nova coluna chamada "email" à tabela "pessoa"
@@ -370,64 +370,30 @@ END;
 /
 
 -- PROCEDURE
-  
--- Essa PROCEDURE irá retornar o nome do paciente e o plano de saúde associado.
+-- Consulta recebe o CPF de um paciente como parâmetro e retorna o nome e o plano de saúde desse paciente.
 CREATE OR REPLACE PROCEDURE consultar_paciente_por_cpf(
-    p_cpf_paciente IN paciente.cpf_p%TYPE,
-    p_nome OUT paciente.nome%TYPE,
-    p_plano_saude OUT paciente.plano_de_saude%TYPE
-)
-AS
+    p_cpf_paciente IN paciente.cpf_p%TYPE)
+    is
+    p_nome pessoa.nome%type;
+    p_plano paciente.plano_de_saude%type;
 BEGIN
     SELECT nome, plano_de_saude
-    INTO p_nome, p_plano_saude
-    FROM paciente
+    INTO p_nome, p_plano
+    FROM paciente pa
+    join pessoa p on pa.cpf_p = p.cpf
     WHERE cpf_p = p_cpf_paciente;
+    dbms_output.put_line(p_nome  '       '  p_plano);
     
-    -- Se a consulta não retornar resultados, pode-se tratar uma exceção aqui.
 
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        -- Tratar a situação de paciente não encontrado, se necessário.
-        p_nome := NULL;
-        p_plano_saude := NULL;
 END;
 /
 
 
 
 --CREATE OR REPLACE TRIGGER (LINHA)
-
-
--- Essa TRIGGER verificará a idade do paciente a ser inserido e permitirá a inserção apenas se a idade for maior ou igual a 18 anos.
-CREATE OR REPLACE TRIGGER tr_verificar_idade_paciente
-BEFORE INSERT ON paciente
-FOR EACH ROW
-DECLARE
-    v_idade NUMBER;
-BEGIN
-    -- Calcular a idade do paciente a ser inserido
-    SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, :NEW.data_nascimento) / 12)
-    INTO v_idade
-    FROM DUAL;
-
-    -- Verificar se a idade é menor que 18 anos
-    IF v_idade < 18 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'A idade do paciente deve ser maior ou igual a 18 anos.');
-    END IF;
-EXCEPTION
-    WHEN OTHERS THEN
-        RAISE;
-END;
-/
-
-
-
---CREATE OR REPLACE TRIGGER (COMANDO)
-
 -- Criação de um trigger que valida a inserção de um novo funcionário para garantir que o salário seja maior que 2000.
 CREATE OR REPLACE TRIGGER valida_salario_funcionario
-BEFORE INSERT ON funcionario
+BEFORE INSERT ON salario
 FOR EACH ROW
 DECLARE
     salario_minimo NUMBER := 2000;
@@ -435,6 +401,18 @@ BEGIN
     IF :NEW.salario < salario_minimo THEN
         RAISE_APPLICATION_ERROR(-20101, 'O salário do funcionário deve ser maior que ' || salario_minimo);
     END IF;
+END;
+/
+
+
+
+--CREATE OR REPLACE TRIGGER (COMANDO)
+--Criando um TRIGGER que não deixa apagar salário
+CREATE OR REPLACE TRIGGER apagarsalario
+BEFORE DELETE ON salario
+DECLARE
+BEGIN
+RAISE_APPLICATION_ERROR(-20101, 'Não se pode excluir um SALARIO');
 END;
 /
 
