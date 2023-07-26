@@ -111,7 +111,7 @@ HAVING AVG(salario) >= 5000;
 
 -- CONSULTA UTILIZANDO O CREATE INDEX
 -- Cria um índice chamado idx_pessoa_cpf na tabela pessoa com base na coluna cpf.
-CREATE INDEX idx_pessoa_cpf ON pessoa (cpf);
+CREATE index idx_pessoa_nome on pessoa(nome);
 
 
 -- Adiciona uma nova coluna chamada "email" à tabela "pessoa"
@@ -370,41 +370,30 @@ END;
 /
 
 -- PROCEDURE
-  
--- Criação de uma procedure que retorna o nome e o CPF de uma pessoa a partir do seu código
-CREATE OR REPLACE PROCEDURE GetNomeECPF (
-    p_codigo IN NUMBER,
-    p_nome OUT VARCHAR2,
-    p_cpf OUT VARCHAR2
-)
-AS
+-- Consulta recebe o CPF de um paciente como parâmetro e retorna o nome e o plano de saúde desse paciente.
+CREATE OR REPLACE PROCEDURE consultar_paciente_por_cpf(
+    p_cpf_paciente IN paciente.cpf_p%TYPE)
+    is
+    p_nome pessoa.nome%type;
+    p_plano paciente.plano_de_saude%type;
 BEGIN
-    SELECT nome, cpf INTO p_nome, p_cpf
-    FROM pessoa
-    WHERE codigo = p_codigo;
+    SELECT nome, plano_de_saude
+    INTO p_nome, p_plano
+    FROM paciente pa
+    join pessoa p on pa.cpf_p = p.cpf
+    WHERE cpf_p = p_cpf_paciente;
+    dbms_output.put_line(p_nome  '       '  p_plano);
+    
+
 END;
 /
+
+
 
 --CREATE OR REPLACE TRIGGER (LINHA)
-
-
--- Criação de um trigger que atualiza a data de modificação sempre que uma linha da tabela pessoa é atualizada.
-CREATE OR REPLACE TRIGGER pessoa_after_update
-AFTER UPDATE ON pessoa
-FOR EACH ROW
-BEGIN
-    UPDATE pessoa
-    SET data_modificacao = SYSDATE
-    WHERE codigo = :OLD.codigo;
-END;
-/
-
-
---CREATE OR REPLACE TRIGGER (COMANDO)
-
 -- Criação de um trigger que valida a inserção de um novo funcionário para garantir que o salário seja maior que 2000.
 CREATE OR REPLACE TRIGGER valida_salario_funcionario
-BEFORE INSERT ON funcionario
+BEFORE INSERT ON salario
 FOR EACH ROW
 DECLARE
     salario_minimo NUMBER := 2000;
@@ -412,6 +401,18 @@ BEGIN
     IF :NEW.salario < salario_minimo THEN
         RAISE_APPLICATION_ERROR(-20101, 'O salário do funcionário deve ser maior que ' || salario_minimo);
     END IF;
+END;
+/
+
+
+
+--CREATE OR REPLACE TRIGGER (COMANDO)
+--Criando um TRIGGER que não deixa apagar salário
+CREATE OR REPLACE TRIGGER apagarsalario
+BEFORE DELETE ON salario
+DECLARE
+BEGIN
+RAISE_APPLICATION_ERROR(-20101, 'Não se pode excluir um SALARIO');
 END;
 /
 
