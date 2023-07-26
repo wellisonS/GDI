@@ -146,9 +146,9 @@ where p.cpf in(select cpf_paciente from prontuario
 
 -- CREATE VIEW
 -- criar uma tabela virtual de médicos pediatras, baseada na tabela real
-CREATE VIEW [Pediatras] AS
+CREATE VIEW Pediatras AS
 SELECT crm, cpf_medico
-FROM medico
+FROM especializacao
 WHERE especializacao = 'Pediatra';
 
 -- Consultas PL/SQL ***********************************************
@@ -428,7 +428,7 @@ end;
 /
 -- CREATE VIEW
 -- criar uma tabela virtual de médicos pediatras, baseada na tabela real
-CREATE VIEW [Pediatras] AS
+CREATE VIEW pediatras AS
 SELECT crm, cpf_medico
 FROM especializacao
 WHERE especializacao = 'Pediatra';
@@ -444,13 +444,18 @@ CREATE TABLE honrado (
 INSERT INTO honrado(cpf_func, nome, cpf_lider) VALUES ('12345', 'Carlos da Silva Nascimento', '12345');
 
 --FOR IN LOOP
--- seleciona 3 funcionarios aleatorios
-FOR i IN 1 .. 3
-LOOP
-    SELECT cpf_fk FROM funcionario
-    ORDER BY RAND ( )  
-    LIMIT 1  
-END LOOP;
+-- varre o total de médicos honrados e vai contando quantos tem
+DECLARE 
+	CURSOR honradocount IS SELECT COUNT(nome) FROM honrado;
+	contagem NUMBER;
+BEGIN
+	OPEN honradocount;
+    FETCH honradocount INTO contagem;
+	FOR m IN 1..contagem LOOP
+    	DBMS_OUTPUT.PUT_LINE( m );
+	END LOOP;
+END;
+
 
 --CREATE FUNCTION
 --funcao que calcula os salarios em dolar
