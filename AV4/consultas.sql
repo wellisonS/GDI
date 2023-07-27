@@ -459,9 +459,9 @@ END;
 
 --CREATE FUNCTION
 --funcao que calcula os salarios em dolar
-CREATE FUNCTION ObterSalarioEmDolar (@salario int)
-RETURNS float
-    AS 
+CREATE FUNCTION ObterSalarioEmDolar (salario in int)
+RETURN float
+    is
     BEGIN
-        RETURN @salario * 4.75
-    END
+        RETURN salario * 4.75;
+    END;
