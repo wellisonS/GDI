@@ -21,7 +21,7 @@ CREATE OR REPLACE TYPE tp_pessoa AS OBJECT (
     sexo VARCHAR2 (1),
     data_nascimento DATE, 
     cpf VARCHAR2 (5)
-);
+)NOT FINAL ;
 
 -- **********************************************************************************
 -- RELACIONAMENTOS
