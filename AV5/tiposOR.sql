@@ -8,8 +8,8 @@ CREATE OR REPLACE TYPE tp_endereco AS OBJECT(
 );
 
 CREATE OR REPLACE TYPE tp_telefone AS OBJECT (
-    numero NUMBER, 
-    cpf_fk VARCHAR2(5)
+    numero NUMBER
+    
 );
 
 CREATE OR REPLACE TYPE tp_telefones AS VARRAY(3) OF tp_telefone;
