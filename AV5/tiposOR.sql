@@ -13,7 +13,7 @@ CREATE OR REPLACE TYPE tp_telefone AS OBJECT (
     numero NUMBER
     
 );
- /
+/
 
 CREATE OR REPLACE TYPE tp_telefones AS VARRAY(3) OF tp_telefone;
 /

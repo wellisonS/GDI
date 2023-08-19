@@ -1,11 +1,11 @@
--- Inserção dos registros na tabela de médicos
+-- Inserindo valores na tabela de médicos.
 INSERT INTO tabela_medicos VALUES (
     tp_medico(
         'Dr. João',
         'M',
         TO_DATE('1980-01-15', 'YYYY-MM-DD'),
         tp_endereco('SP', 'São Paulo', 'Rua A', 123, 'Apto 4', '01234'),
-        tp_telefones(tp_telefone(2)),
+        tp_telefones(tp_telefone(819890123)),
         '12345',
         'CRM12',
         'Cardiologia'
@@ -18,7 +18,7 @@ INSERT INTO tabela_medicos VALUES (
         'M',
         TO_DATE('1974-07-18', 'YYYY-MM-DD'),
         tp_endereco('PE', 'Recife', 'Rua da Aurora', 12, '', '22334'),
-        tp_telefones(tp_telefone(2)),
+        tp_telefones(tp_telefone(819345678)),
         '44556',
         'CRM34',
         'Cirurgião'
@@ -31,12 +31,43 @@ INSERT INTO tabela_medicos VALUES (
         'F',
         TO_DATE('1992-05-25', 'YYYY-MM-DD'),
         tp_endereco('PE', 'Recife', 'Av General Polidoro', 504, 'Apto 213', '10158'),
-        tp_telefones(tp_telefone(2)),
+        tp_telefones(tp_telefone(819789012)),
         '03781',
         'CRM78',
         'Dermatologista'
     )
 );
+
+INSERT INTO tabela_medicos VALUES (
+    tp_medico(
+        'Sofia Oliveira Santos',
+        'F',
+        TO_DATE('1995-07-10','yyyy-mm-dd'),
+        tp_endereco('PE', 'Recife', 'Av General Polidoro', 504, 'Apto 313', '10158'),
+        tp_telefones(tp_telefone(819123456), tp_telefone(819234567)),
+        '34692',
+        'CRM73',
+        'Pediatra'
+    )
+);
+
+INSERT INTO tabela_medicos VALUES (
+    tp_medico(
+        'Laura Pereira Almeida',
+        'F',
+        TO_DATE('2001-03-20','yyyy-mm-dd'),
+        tp_endereco('PE', 'Recife', 'Rua da moeda', 303, 'Apto 502', '54642'),
+        tp_telefones(tp_telefone(81998765452)),
+        '35691',
+        'CRM89',
+        'Clínica Médica'
+    )
+);
+
+
+
+
+
 -- Inserindo valores na tabela de enfermeiros.
 INSERT INTO tabela_enfermeiros VALUES (
     tp_enfermeiro(
