@@ -45,5 +45,28 @@ CREATE OR REPLACE TYPE BODY tp_medico AS
     END get_nome;
 END;
 
+CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_pessoa (
+    coren VARCHAR2(5),
+    --Herda de pessoa
+
+    MEMBER PROCEDURE exibir_informacoes
+
+);
+
+
+CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
+    MEMBER PROCEDURE exibir_informacoes IS
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('Nome: ' || self.nome);
+        DBMS_OUTPUT.PUT_LINE('Sexo: ' || self.sexo);
+        DBMS_OUTPUT.PUT_LINE('Data de Nascimento: ' || TO_CHAR(self.data_nascimento, 'DD-MON-YYYY'));
+        DBMS_OUTPUT.PUT_LINE('Endereço: ' || self.endereco.rua || ', ' || self.endereco.numero || ', ' || self.endereco.cidade || ', ' || self.endereco.estado);
+        DBMS_OUTPUT.PUT_LINE('Telefone: ' || self.telefone.numero);
+        DBMS_OUTPUT.PUT_LINE('CPF: ' || self.cpf);
+        DBMS_OUTPUT.PUT_LINE('COREN: ' || self.coren);
+    END exibir_informacoes;
+END;
+/
+
 -- **********************************************************************************
 -- RELACIONAMENTOS
