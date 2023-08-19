@@ -7,6 +7,7 @@ CREATE OR REPLACE TYPE tp_endereco AS OBJECT(
     complemento VARCHAR2(50),
     cep VARCHAR2 (5)
 );
+/
 
 CREATE OR REPLACE TYPE tp_telefone AS OBJECT (
     numero NUMBER
