@@ -102,3 +102,36 @@ INSERT INTO tabela_enfermeiros VALUES (
         '50111'
     )
 );
+
+
+-- Inserindo valores na tabela de funcionários.
+INSERT INTO tabela_funcionarios VALUES (
+    tp_funcionario(
+        'Thomas Costa da Silva',
+        'M',
+        TO_DATE('1984-08-10', 'YYYY-MM-DD'),
+        tp_endereco('PE', 'Camaragibe', 'Rua Santana', 345, 'Apto 801', '14092'),
+        tp_telefones(tp_telefone(87993576802)),
+        '78203',
+    )
+);
+INSERT INTO tabela_funcionarios VALUES (
+    tp_funcionario(
+        'Juliana Mendonça Melo',
+        'F',
+        TO_DATE('1978-11-04', 'YYYY-MM-DD'),
+        tp_endereco('RJ', 'Rio de Janeiro', 'Rua Joaquim Cardoso', 897, 'Apto 102', '18930'),
+        tp_telefones(tp_telefone(81978435600)),
+        '99562',
+    )
+);
+INSERT INTO tabela_funcionarios VALUES (
+    tp_funcionario(
+        'Pedro Mendes Neto',
+        'M',
+        TO_DATE('1995-12-06', 'YYYY-MM-DD'),
+        tp_endereco('PE', 'Olinda', 'Rua Beija Flor', 153, 'Apto 401', '25004'),
+        tp_telefones(tp_telefone(81988623773)),
+        '29008',
+    )
+);

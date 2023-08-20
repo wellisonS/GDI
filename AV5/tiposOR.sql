@@ -68,5 +68,27 @@ CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
 END;
 /
 
+CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
+    -- Herda de tp_pessoa
+    
+    CONSTRUCTOR FUNCTION tp_funcionario (x1 tp_funcionario) RETURN SELF AS RESULT
+
+);
+/
+
+CREATE OR REPLACE TYPE BODY tp_funcionario AS
+    CONSTRUCTOR FUNCTION tp_funcionario (x1 tp_funcionario) RETURN SELF AS RESULT IS
+    BEGIN
+        SELF.nome: x1.nome;
+        SELF.sexo: x1.sexo;
+        SELF.data_nascimento: x1.data_nascimento;
+        SELF.endereco: x1.endereco;
+        SELF.telefone: x1.telefone;
+        SELF.cpf: x1.cpf;
+        RETURN;
+    END;
+END;
+/
+
 -- **********************************************************************************
 -- RELACIONAMENTOS
