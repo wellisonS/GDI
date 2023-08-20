@@ -53,6 +53,12 @@ CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_pessoa (
 
 );
 
+--REF e WITH ROWID
+CREATE OR REPLACE TYPE tp_atendente AS OBJECT(
+    endereco    REF tp_endereco,
+    telefone    WITH ROWID REFERENCES tp_telefone
+) NOT FINAL;
+/
 
 CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
     MEMBER PROCEDURE exibir_informacoes IS
@@ -88,6 +94,17 @@ CREATE OR REPLACE TYPE BODY tp_funcionario AS
         RETURN;
     END;
 END;
+/
+
+CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
+    -- ORDER
+    cargo VARCHAR2 (50),
+    cpf_func VARCHAR2(5),
+    salario NUMBER NOT NULL,
+    MEMBER PROCEDURE exibir_informacoes,
+    ORDER MEMBER FUNCTION orderer(f tp_funcionario) RETURN NUMBER NOT NULL
+
+);
 /
 
 -- **********************************************************************************

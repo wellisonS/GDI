@@ -12,3 +12,7 @@ CREATE TABLE tabela_funcionarios OF tp_funcionario (
 	cpf PRIMARY KEY 
     
 );
+
+CREATE TABLE tabela_atendentes OF tp_atendente (
+	cpf PRIMARY KEY
+);
