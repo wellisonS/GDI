@@ -161,3 +161,36 @@ INSERT INTO tabela_funcionarios VALUES (
         '29008',
     )
 );
+
+
+-- Inserindo valores na tabela de atendentes.
+INSERT INTO tabela_atendentes VALUES (
+    tp_atendente(
+        'Bêtane Costa Almeida',
+        'F',
+        TO_DATE('1997-05-15', 'YYYY-MM-DD'),
+        tp_endereco('PE', 'Recife', 'Rua Capitao Zuzinha', 231, 'Apto 201', '13628'),
+        tp_telefones(tp_telefone(81999887654)),
+        '54313',
+    )
+);
+INSERT INTO tabela_atendentes VALUES (
+    tp_funcionario(
+        'Pedro Balla Azevedo Linz',
+        'M',
+        TO_DATE('2002-02-03', 'YYYY-MM-DD'),
+        tp_endereco('PE', 'Guararapes', 'Rua Colonel Antenor', 405, 'Apto 1303', '22305'),
+        tp_telefones(tp_telefone(81997274057)),
+        '77560',
+    )
+);
+INSERT INTO tabela_atendentes VALUES (
+    tp_funcionario(
+        'Analuz Leite de Albuquerque',
+        'F',
+        TO_DATE('1948-09-07', 'YYYY-MM-DD'),
+        tp_endereco('PE', 'Recife', 'Rua da Aurora', 775, 'Apto 602', '59874'),
+        tp_telefones(tp_telefone(81996542324)),
+        '680104',
+    )
+);
