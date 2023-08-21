@@ -47,7 +47,7 @@ END;
 
 CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_pessoa (
     coren VARCHAR2(5),
-    --Herda de pessoa
+    --Herda os atributos de tp_pessoa
 
     MEMBER PROCEDURE exibir_informacoes
 
@@ -71,6 +71,22 @@ CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
         DBMS_OUTPUT.PUT_LINE('CPF: ' || self.cpf);
         DBMS_OUTPUT.PUT_LINE('COREN: ' || self.coren);
     END exibir_informacoes;
+END;
+/
+
+DECLARE
+    enfermeiro_coren VARCHAR2(5); 
+    enfermeiro tp_enfermeiro;
+BEGIN
+
+    enfermeiro_coren := '54111';
+    
+    SELECT VALUE(e) INTO enfermeiro
+    FROM tabela_enfermeiros e
+    WHERE e.coren = enfermeiro_coren;
+    
+    -- Chama o procedimento para exibir as informações
+    enfermeiro.exibir_informacoes();
 END;
 /
 
