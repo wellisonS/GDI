@@ -17,3 +17,8 @@ CREATE TABLE tabela_funcionarios OF tp_funcionario (
 CREATE TABLE tabela_atendentes OF tp_atendente (
 	cpf PRIMARY KEY
 );
+
+CREATE TABLE tb_paciente OF tp_paciente(
+    cpf primary key
+);
+/

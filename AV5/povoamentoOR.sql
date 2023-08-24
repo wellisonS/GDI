@@ -194,3 +194,64 @@ INSERT INTO tabela_atendentes VALUES (
         '680104',
     )
 );
+
+insert into tb_paciente values(
+    tp_paciente(
+    'Miguel Lima Oliveira','M', TO_DATE('1977-11-09', 'yyyy-mm-dd'), '40579',
+    tp_endereco('SP','Sao Paulo','Rua Augusta',123,'','74153'),
+    tp_telefones(tp_telefone(119963245)),
+    'Unimed',
+    tp_prontuario('1.40','10/6','50kg','35°C'),
+    tp_acompanhante('Laura Costa Sousa','30948')
+    )
+);
+insert into tb_paciente values(
+    tp_paciente(
+    'Heloísa Costa Santos','F', TO_DATE('1993-06-30', 'yyyy-mm-dd'), '72681',
+    tp_endereco('GO','Goiania','Segunda Avenida Radial',123,'','75368'),
+    tp_telefones(tp_telefone(629486550)),
+    'Hapvida',
+    tp_prontuario('1.57','12/8','60kg','39°C'),
+    tp_acompanhante('Lorenzo Almeida Santos','67512')
+    )
+);
+insert into tb_paciente values(
+    tp_paciente(
+    'Davi Almeida Sousa','M', TO_DATE('1986-03-13', 'yyyy-mm-dd'), '19435',
+    tp_endereco('PE','Olinda','Rua Alegria',123,'','14796'),
+    tp_telefones(tp_telefone(819123456)),
+    'Amil',
+    tp_prontuario('1.92','13/8','120kg','38°C'),
+    tp_acompanhante('Lara Sousa Costa','84196')
+    )
+);
+insert into tb_paciente values(
+    tp_paciente(
+    'Heitor Oliveira Silva','M', TO_DATE('1999-12-18', 'yyyy-mm-dd'), '86723',
+    tp_endereco('PE','Recife','Rua do Sol',123,'Apto 403','15974'),
+    tp_telefones(tp_telefone(819789012)),
+    'Bradesco',
+    tp_prontuario('1.65','14/9','90kg','37°C'),
+    tp_acompanhante()
+    )
+);
+insert into tb_paciente values(
+    tp_paciente(
+    'Miguel Lima Oliveira','M', TO_DATE('1977-11-09', 'yyyy-mm-dd'), '40579',
+    tp_endereco('SP','Sao Paulo','Rua Augusta',123,'apto 1301','74153'),
+    tp_telefones(tp_telefone(119963245)),
+    'Unimed',
+    tp_prontuario('1.40','10/6','50kg','35°C'),
+    tp_acompanhante('Laura Costa Sousa','30948')
+    )
+);
+insert into tb_paciente values(
+    tp_paciente(
+    'Giovanna Sousa Silva','F', TO_DATE('2002-02-14', 'yyyy-mm-dd'), '93642',
+    tp_endereco('RJ','Rio de Janeiro','Rua Manoel Carneiro',1,'','25896'),
+    tp_telefones(tp_telefone(219654821)),
+    'Sulamerica',
+    tp_prontuario('1.75','13/2','87kg','36°C'),
+    tp_acompanhante('Maria Lima Costa','51076')
+    )
+);

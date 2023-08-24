@@ -22,10 +22,19 @@ CREATE OR REPLACE TYPE tp_pessoa AS OBJECT (
     nome VARCHAR2(50),
     sexo VARCHAR2 (1),
     data_nascimento DATE, 
+    cpf VARCHAR2 (5),
     endereco tp_endereco,
-    telefone tp_telefones,
-    cpf VARCHAR2 (5)
-) NOT FINAL NOT INSTANTIABLE;
+    telefones tp_telefones,
+    MEMBER FUNCTION detalhes RETURN VARCHAR2
+) NOT INSTANTIABLE NOT FINAL;
+/
+
+CREATE OR REPLACE TYPE BODY tp_pessoa AS
+    MEMBER FUNCTION detalhes RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Nome: ' || nome || ', CPF: ' || cpf;
+    END detalhes;
+END;
 /
 CREATE OR REPLACE TYPE tp_medico UNDER tp_pessoa (
     crm VARCHAR2(5),
@@ -38,6 +47,42 @@ CREATE OR REPLACE TYPE tp_medico UNDER tp_pessoa (
    
 );
 /
+
+CREATE TYPE tp_acompanhante AS OBJECT(
+    nome varchar2(30),
+    cpf_acompanhante varchar2(30)
+);
+/
+
+CREATE TYPE tp_prontuario AS OBJECT(
+    altura VARCHAR2(4),
+    pressao VARCHAR2(5),
+    peso VARCHAR2(6),
+    temperatura VARCHAR2(6)
+);
+/
+
+CREATE OR REPLACE TYPE tp_paciente UNDER tp_pessoa(
+    plano_de_saude VARCHAR2(50),
+    prontuario tp_prontuario,
+    acompanhante tp_acompanhante,
+    OVERRIDING MEMBER FUNCTION detalhes return VARCHAR2,
+    FINAL MEMBER FUNCTION print_prontuario return VARCHAR2
+);
+/
+CREATE OR REPLACE TYPE BODY tp_paciente AS
+OVERRIDING MEMBER FUNCTION detalhes RETURN VARCHAR2 IS
+BEGIN
+    RETURN 'Nome paciente: ' || nome || ', CPF paciente: ' || cpf || 
+           ', Nome acompanhante: ' || acompanhante.nome || ', CPF acompanhante: ' || acompanhante.cpf_acompanhante;
+END detalhes;
+FINAL MEMBER FUNCTION print_prontuario RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'cpf paciente: ' || cpf || ' plano de saúde: ' || plano_de_saude || ' pressão: ' || prontuario.pressao || ' Altura: ' || prontuario.altura || ' Peso: ' || prontuario.peso || ' Temperatura: ' || prontuario.temperatura;
+END print_prontuario;
+END;
+/
+
 CREATE OR REPLACE TYPE BODY tp_medico AS
     MEMBER FUNCTION get_nome RETURN VARCHAR2 IS
     BEGIN
