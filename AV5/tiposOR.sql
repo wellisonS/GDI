@@ -36,7 +36,30 @@ CREATE OR REPLACE TYPE BODY tp_pessoa AS
     END detalhes;
 END;
 /
-CREATE OR REPLACE TYPE tp_medico UNDER tp_pessoa (
+
+CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
+    -- Herda de tp_pessoa
+    
+    CONSTRUCTOR FUNCTION tp_funcionario (x1 tp_pessoa) RETURN SELF AS RESULT
+
+)  NOT FINAL ;
+/
+
+CREATE OR REPLACE TYPE BODY tp_funcionario AS
+    CONSTRUCTOR FUNCTION tp_funcionario (x1 tp_pessoa) RETURN SELF AS RESULT IS
+    BEGIN
+        SELF.nome:= x1.nome;
+        SELF.sexo:= x1.sexo;
+        SELF.data_nascimento:= x1.data_nascimento;
+        SELF.endereco:= x1.endereco;
+        SELF.telefone:= x1.telefone;
+        SELF.cpf:= x1.cpf;
+        RETURN;
+    END;
+END;
+/
+
+CREATE OR REPLACE TYPE tp_medico UNDER tp_funcionario (
     crm VARCHAR2(5),
     especializacao VARCHAR2(50),
     
@@ -47,6 +70,53 @@ CREATE OR REPLACE TYPE tp_medico UNDER tp_pessoa (
    
 );
 /
+
+CREATE OR REPLACE TYPE BODY tp_medico AS
+    MEMBER FUNCTION get_nome RETURN VARCHAR2 IS
+    BEGIN
+        RETURN self.nome;
+    END get_nome;
+END;
+/
+
+
+
+
+
+CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_funcionario (
+    coren VARCHAR2(5),
+    --Herda os atributos de tp_pessoa
+
+    MEMBER PROCEDURE exibir_informacoes
+
+);
+/
+    
+CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
+    MEMBER PROCEDURE exibir_informacoes IS
+        idade NUMBER;
+        endereco_info VARCHAR2(200);
+    BEGIN
+        idade := FLOOR(MONTHS_BETWEEN(SYSDATE, self.data_nascimento) / 12);
+        
+        endereco_info := self.endereco.rua || ', ' || self.endereco.numero || ', ' || self.endereco.cidade || ', ' || self.endereco.estado;
+        
+        DBMS_OUTPUT.PUT_LINE('Nome: ' || self.nome);
+        DBMS_OUTPUT.PUT_LINE('Idade: ' || idade);
+        DBMS_OUTPUT.PUT_LINE('Endereço: ' || endereco_info);
+        DBMS_OUTPUT.PUT_LINE('COREN: ' || self.coren);
+    END exibir_informacoes;
+END;
+/
+
+
+
+
+CREATE OR REPLACE TYPE tp_atendente UNDER tp_funcionario(
+
+) NOT FINAL;
+/
+
 
 CREATE TYPE tp_acompanhante AS OBJECT(
     nome varchar2(30),
@@ -83,95 +153,19 @@ END print_prontuario;
 END;
 /
 
-CREATE OR REPLACE TYPE BODY tp_medico AS
-    MEMBER FUNCTION get_nome RETURN VARCHAR2 IS
-    BEGIN
-        RETURN self.nome;
-    END get_nome;
-END;
-
-CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_pessoa (
-    coren VARCHAR2(5),
-    --Herda os atributos de tp_pessoa
-
-    MEMBER PROCEDURE exibir_informacoes
-
-);
-/
-    
-CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
-    MEMBER PROCEDURE exibir_informacoes IS
-        idade NUMBER;
-        endereco_info VARCHAR2(200);
-    BEGIN
-        idade := FLOOR(MONTHS_BETWEEN(SYSDATE, self.data_nascimento) / 12);
-        
-        endereco_info := self.endereco.rua || ', ' || self.endereco.numero || ', ' || self.endereco.cidade || ', ' || self.endereco.estado;
-        
-        DBMS_OUTPUT.PUT_LINE('Nome: ' || self.nome);
-        DBMS_OUTPUT.PUT_LINE('Idade: ' || idade);
-        DBMS_OUTPUT.PUT_LINE('Endereço: ' || endereco_info);
-        DBMS_OUTPUT.PUT_LINE('COREN: ' || self.coren);
-    END exibir_informacoes;
-END;
-/
 
 
-DECLARE
-    enfermeiro_coren VARCHAR2(5); 
-    enfermeiro tp_enfermeiro;
-BEGIN
 
-    enfermeiro_coren := '54111';
-    
-    SELECT VALUE(e) INTO enfermeiro
-    FROM tabela_enfermeiros e
-    WHERE e.coren = enfermeiro_coren;
-    
-    -- Chama o procedimento para exibir as informações
-    enfermeiro.exibir_informacoes();
-END;
-/
-
---REF e WITH ROWID
-CREATE OR REPLACE TYPE tp_atendente AS OBJECT(
-    endereco    REF tp_endereco,
-    telefone    REF tp_telefone
-) NOT FINAL;
-/
-
-CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
-    -- Herda de tp_pessoa
-    
-    CONSTRUCTOR FUNCTION tp_funcionario (x1 tp_funcionario) RETURN SELF AS RESULT
-
-);
-/
-
-CREATE OR REPLACE TYPE BODY tp_funcionario AS
-    CONSTRUCTOR FUNCTION tp_funcionario (x1 tp_funcionario) RETURN SELF AS RESULT IS
-    BEGIN
-        SELF.nome: x1.nome;
-        SELF.sexo: x1.sexo;
-        SELF.data_nascimento: x1.data_nascimento;
-        SELF.endereco: x1.endereco;
-        SELF.telefone: x1.telefone;
-        SELF.cpf: x1.cpf;
-        RETURN;
-    END;
-END;
-/
-
-CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
+--CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
     -- ORDER
-    cargo VARCHAR2 (50),
-    cpf_func VARCHAR2(5),
-    salario NUMBER NOT NULL,
-    MEMBER PROCEDURE exibir_informacoes,
-    ORDER MEMBER FUNCTION orderer(f tp_funcionario) RETURN NUMBER NOT NULL
+  --  cargo VARCHAR2 (50),
+   -- cpf_func VARCHAR2(5),
+   -- salario NUMBER NOT NULL,
+   -- MEMBER PROCEDURE exibir_informacoes,
+   -- ORDER MEMBER FUNCTION orderer(f tp_funcionario) RETURN NUMBER NOT NULL
 
-);
-/
+--);
+--/
 
 -- **********************************************************************************
 -- RELACIONAMENTOS
