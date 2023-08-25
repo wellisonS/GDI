@@ -97,13 +97,9 @@ CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_pessoa (
     MEMBER PROCEDURE exibir_informacoes
 
 );
-
---REF e WITH ROWID
-CREATE OR REPLACE TYPE tp_atendente AS OBJECT(
-    endereco    REF tp_endereco,
-    telefone    WITH ROWID REFERENCES tp_telefone
-) NOT FINAL;
 /
+
+
 
 CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
     MEMBER PROCEDURE exibir_informacoes IS
@@ -133,6 +129,13 @@ BEGIN
     -- Chama o procedimento para exibir as informações
     enfermeiro.exibir_informacoes();
 END;
+/
+
+--REF e WITH ROWID
+CREATE OR REPLACE TYPE tp_atendente AS OBJECT(
+    endereco    REF tp_endereco,
+    telefone    REF tp_telefone
+) NOT FINAL;
 /
 
 CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
