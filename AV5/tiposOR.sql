@@ -170,3 +170,36 @@ CREATE OR REPLACE TYPE tp_funcionario UNDER tp_pessoa (
 
 -- **********************************************************************************
 -- RELACIONAMENTOS
+CREATE TYPE tp_cirurgia AS OBJECT (
+
+    dados_medico REf tp_medico,
+    dados_enfermeiro REF tp_enfermeiro,
+    dados_paciente REF tp_paciente,
+    data_cirurgia DATE
+
+);
+
+CREATE TYPE tp_agenda AS OBJECT (
+
+    dados_atendente REF tp_atendente,
+    dados_paciente REF tp_paciente,
+    data_agendada DATE,
+
+    MEMBER FUNCTION consulta_data RETURN VARCHAR2
+
+);
+/
+CREATE OR REPLACE TYPE BODY tp_agenda AS
+    MEMBER FUNCTION consulta_data RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Seu atendimento foi agendado para: ' || data_agendada ;
+    END consulta_data;
+END;
+/
+
+CREATE OR REPLACE TYPE tp_medico_paciente AS OBJECT (
+
+    dados_medico REF tp_medico,
+    dados_paciente REF tp_paciente,
+    data_atendimento DATE
+);

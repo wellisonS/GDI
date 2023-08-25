@@ -194,7 +194,7 @@ INSERT INTO tabela_atendentes VALUES (
         '680104',
     )
 );
-
+-- Inserindo valores na tabela de pacientes
 insert into tb_paciente values(
     tp_paciente(
     'Miguel Lima Oliveira','M', TO_DATE('1977-11-09', 'yyyy-mm-dd'), '40579',

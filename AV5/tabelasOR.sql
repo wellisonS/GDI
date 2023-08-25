@@ -22,3 +22,11 @@ CREATE TABLE tb_paciente OF tp_paciente(
     cpf primary key
 );
 /
+
+-- ***************** RELACIONAMENTOS 
+
+CREATE TABLE tb_cirurgia OF tp_cirurgia(
+	dados_medico WITH ROWID REFERENCES tabela_medicos,
+	dados_enfermeiro WITH ROWID REFERENCES tabela_enfermeiros,
+	dados_paciente WITH ROWID REFERENCES tb_paciente
+);
