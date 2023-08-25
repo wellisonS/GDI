@@ -319,7 +319,7 @@ INSERT INTO tabela_agenda VALUES (
     );
 
     
-
+/
 -- INSERINDO CIRURGIAS 
 
 INSERT INTO tabela_cirurgia VALUES (
@@ -329,6 +329,43 @@ INSERT INTO tabela_cirurgia VALUES (
 
         TO_DATE('2022-08-19', 'YYYY-MM-DD')
     );
-
+/
 -- INSERINDO NA TABELA MEDICO-PACIENTE 
 
+INSERT INTO tabela_medico_paciente VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
+
+        TO_DATE('2022-08-30', 'YYYY-MM-DD')
+    );
+
+/
+
+INSERT INTO tabela_medico_paciente VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM12'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '40579'),
+
+        TO_DATE('2022-04-22', 'YYYY-MM-DD')
+    );
+/
+INSERT INTO tabela_medico_paciente VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM12'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '19435'),
+
+        TO_DATE('2021-03-15', 'YYYY-MM-DD')
+    );
+
+
+INSERT INTO tabela_medico_paciente VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '86723'),
+
+        TO_DATE('2020-02-16', 'YYYY-MM-DD')
+    );
+
+INSERT INTO tabela_medico_paciente VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '86723'),
+
+        TO_DATE('2022-01-30', 'YYYY-MM-DD')
+    );

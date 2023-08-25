@@ -28,5 +28,31 @@ BEGIN
 END;
 /
 
+-- Testando member function de agenda 
+
+DECLARE
+    atendente_cpf VARCHAR2(5);
+    paciente_cpf  VARCHAR2(5);
+    consulta_data_result VARCHAR2(300);
+    agenda tp_agenda;
+BEGIN
+    atendente_cpf := '68014';
+    paciente_cpf := '93642';
+    
+    SELECT VALUE(a) INTO agenda
+    FROM tabela_agenda a
+    WHERE a.dados_atendente.cpf = atendente_cpf
+    AND a.dados_paciente.cpf = paciente_cpf;
+    
+    consulta_data_result := agenda.consulta_data();
+
+    DBMS_OUTPUT.PUT_LINE('Consulta agendada para: ' || consulta_data_result);
+
+
+END;
+/
+
+
+
 
 

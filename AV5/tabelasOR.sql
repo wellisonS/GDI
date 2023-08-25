@@ -36,3 +36,9 @@ CREATE TABLE tabela_agenda OF tp_agenda (
 	dados_paciente WITH ROWID REFERENCES tb_paciente
 
 );
+
+CREATE TABLE tabela_medico_paciente OF tp_medico_paciente (
+	dados_medico WITH ROWID REFERENCES tabela_medicos,
+	dados_paciente WITH ROWID REFERENCES tb_paciente
+);
+
