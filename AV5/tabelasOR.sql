@@ -25,8 +25,14 @@ CREATE TABLE tb_paciente OF tp_paciente(
 
 -- ***************** RELACIONAMENTOS 
 
-CREATE TABLE tb_cirurgia OF tp_cirurgia(
+CREATE TABLE tabela_cirurgia OF tp_cirurgia(
 	dados_medico WITH ROWID REFERENCES tabela_medicos,
 	dados_enfermeiro WITH ROWID REFERENCES tabela_enfermeiros,
 	dados_paciente WITH ROWID REFERENCES tb_paciente
+);
+
+CREATE TABLE tabela_agenda OF tp_agenda (
+	dados_atendente WITH ROWID REFERENCES tabela_atendentes,
+	dados_paciente WITH ROWID REFERENCES tb_paciente
+
 );

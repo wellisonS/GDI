@@ -67,7 +67,6 @@ CREATE OR REPLACE TYPE tp_medico UNDER tp_funcionario (
     MEMBER FUNCTION get_nome RETURN VARCHAR2
 
     
-   
 );
 /
 

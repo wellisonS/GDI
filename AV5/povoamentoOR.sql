@@ -308,3 +308,27 @@ insert into tb_paciente values(
 );
 
 /
+-- ****************************  RELACIONAMENTOS 
+
+-- INSERINDO AGENDAMENTOS 
+INSERT INTO tabela_agenda VALUES (
+    (SELECT REF(a) FROM tabela_atendentes a WHERE a.cpf = '68014'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
+
+        TO_DATE('2023-08-30', 'YYYY-MM-DD')
+    );
+
+    
+
+-- INSERINDO CIRURGIAS 
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '54111'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '40579'),
+
+        TO_DATE('2022-08-19', 'YYYY-MM-DD')
+    );
+
+-- INSERINDO NA TABELA MEDICO-PACIENTE 
+

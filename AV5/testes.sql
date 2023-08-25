@@ -13,3 +13,20 @@ BEGIN
     enfermeiro.exibir_informacoes();
 END;
 /
+
+DECLARE
+    medico_crm VARCHAR2(5);
+    medico tp_medico;
+BEGIN
+    medico_crm := 'CRM12';
+    
+    SELECT VALUE(m) INTO medico
+    FROM tabela_medicos m
+    WHERE m.crm = medico_crm;
+    
+    DBMS_OUTPUT.PUT_LINE('Nome do Médico: ' || medico.get_nome());
+END;
+/
+
+
+
