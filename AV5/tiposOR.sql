@@ -98,22 +98,24 @@ CREATE OR REPLACE TYPE tp_enfermeiro UNDER tp_pessoa (
 
 );
 /
-
-
-
+    
 CREATE OR REPLACE TYPE BODY tp_enfermeiro AS
     MEMBER PROCEDURE exibir_informacoes IS
+        idade NUMBER;
+        endereco_info VARCHAR2(200);
     BEGIN
+        idade := FLOOR(MONTHS_BETWEEN(SYSDATE, self.data_nascimento) / 12);
+        
+        endereco_info := self.endereco.rua || ', ' || self.endereco.numero || ', ' || self.endereco.cidade || ', ' || self.endereco.estado;
+        
         DBMS_OUTPUT.PUT_LINE('Nome: ' || self.nome);
-        DBMS_OUTPUT.PUT_LINE('Sexo: ' || self.sexo);
-        DBMS_OUTPUT.PUT_LINE('Data de Nascimento: ' || TO_CHAR(self.data_nascimento, 'DD-MON-YYYY'));
-        DBMS_OUTPUT.PUT_LINE('Endereço: ' || self.endereco.rua || ', ' || self.endereco.numero || ', ' || self.endereco.cidade || ', ' || self.endereco.estado);
-        DBMS_OUTPUT.PUT_LINE('Telefone: ' || self.telefone.numero);
-        DBMS_OUTPUT.PUT_LINE('CPF: ' || self.cpf);
+        DBMS_OUTPUT.PUT_LINE('Idade: ' || idade);
+        DBMS_OUTPUT.PUT_LINE('Endereço: ' || endereco_info);
         DBMS_OUTPUT.PUT_LINE('COREN: ' || self.coren);
     END exibir_informacoes;
 END;
 /
+
 
 DECLARE
     enfermeiro_coren VARCHAR2(5); 
