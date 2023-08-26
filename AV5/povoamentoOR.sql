@@ -308,6 +308,35 @@ insert into tb_paciente values(
 );
 
 /
+
+INSERT INTO tabela_medicamentos VALUES (
+    10500,
+    'rivotril',
+    tp_tarja_medicamento('PRETA')
+
+
+);
+INSERT INTO tabela_medicamentos VALUES (
+    1000,
+    'vitamina C',
+    tp_tarja_medicamento('SEM TARJA')
+
+
+);
+INSERT INTO tabela_medicamentos VALUES (
+    2000,
+    'paracentamol',
+    tp_tarja_medicamento('LARANJA')
+
+
+);
+INSERT INTO tabela_medicamentos VALUES (
+    10000,
+    'dipirona',
+    tp_tarja_medicamento('SEM TARJA')
+
+
+);
 -- ****************************  RELACIONAMENTOS 
 
 -- INSERINDO AGENDAMENTOS 
@@ -316,10 +345,25 @@ INSERT INTO tabela_agenda VALUES (
     (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
 
         TO_DATE('2023-08-30', 'YYYY-MM-DD')
-    );
-
-    
+    );  
 /
+
+-- INSERINDO NA NESTED TABLE 
+
+INSERT INTO tb_lista_telefones VALUES (
+    tp_enfermeiro(
+        'Maria josé Pinto de Souza',
+        'F',
+        TO_DATE('1990-10-10', 'YYYY-MM-DD'),
+        '12445',
+        tp_endereco('PE', 'Limoeiro', 'Rua Casablanca', 777, 'Apto 7', '77777'),
+        tp_telefones(tp_telefone(81952231)),
+        '50505'
+    ),
+    tp_nt_fone(tp_telefone(5478962),tp_telefone(54785462))
+);
+
+
 -- INSERINDO CIRURGIAS 
 
 INSERT INTO tabela_cirurgia VALUES (
@@ -354,7 +398,7 @@ INSERT INTO tabela_medico_paciente VALUES (
 
         TO_DATE('2021-03-15', 'YYYY-MM-DD')
     );
-
+/
 
 INSERT INTO tabela_medico_paciente VALUES (
     (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
@@ -362,10 +406,46 @@ INSERT INTO tabela_medico_paciente VALUES (
 
         TO_DATE('2020-02-16', 'YYYY-MM-DD')
     );
-
+/
 INSERT INTO tabela_medico_paciente VALUES (
     (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
     (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '86723'),
 
         TO_DATE('2022-01-30', 'YYYY-MM-DD')
     );
+
+/
+
+INSERT INTO tabela_preescreve VALUES (
+    
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
+    (SELECT REF(m) FROM tabela_medicamentos m WHERE m.nome_medicamento = 'rivotril'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '86723'),
+    TO_DATE('2020-01-01', 'YYYY-MM-DD')
+
+);
+
+/
+
+INSERT INTO tabela_preescreve VALUES (
+    
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
+    (SELECT REF(m) FROM tabela_medicamentos m WHERE m.nome_medicamento = 'vitamina c'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
+    TO_DATE('2021-05-15', 'YYYY-MM-DD')
+
+);
+
+/
+
+INSERT INTO tabela_preescreve VALUES (
+    
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM89'),
+    (SELECT REF(m) FROM tabela_medicamentos m WHERE m.nome_medicamento = 'vitamina c'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '19435'),
+    TO_DATE('2022-09-30','YYYY-MM-DD')
+
+);
+
+/
+

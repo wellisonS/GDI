@@ -17,6 +17,11 @@ CREATE OR REPLACE TYPE tp_telefone AS OBJECT (
 
 CREATE OR REPLACE TYPE tp_telefones AS VARRAY(3) OF tp_telefone;
 /
+
+CREATE TYPE tp_nt_fone AS TABLE OF tp_telefone;
+
+/
+
 CREATE OR REPLACE TYPE tp_pessoa AS OBJECT (
 
     nome VARCHAR2(50),
@@ -63,6 +68,7 @@ CREATE OR REPLACE TYPE tp_medico UNDER tp_funcionario (
     crm VARCHAR2(5),
     especializacao VARCHAR2(50),
     
+    
     -- Herança dos atributos de tp_pessoa
     MEMBER FUNCTION get_nome RETURN VARCHAR2
 
@@ -77,7 +83,6 @@ CREATE OR REPLACE TYPE BODY tp_medico AS
     END get_nome;
 END;
 /
-
 
 
 
@@ -116,13 +121,14 @@ CREATE OR REPLACE TYPE tp_atendente UNDER tp_funcionario(
 ) NOT FINAL;
 /
 
+ALTER TYPE tp_atendente FINAL;
+/
 
 CREATE TYPE tp_acompanhante AS OBJECT(
     nome varchar2(30),
     cpf_acompanhante varchar2(30)
 );
 /
-
 CREATE TYPE tp_prontuario AS OBJECT(
     altura VARCHAR2(4),
     pressao VARCHAR2(5),
@@ -152,6 +158,30 @@ END print_prontuario;
 END;
 /
 
+CREATE TYPE tp_tarja_medicamento AS OBJECT(
+     tarja VARCHAR2(50) 
+
+);
+
+/
+
+CREATE TYPE tp_medicamento AS OBJECT(
+
+    dosagem NUMBER,
+    nome_medicamento VARCHAR2(255),
+    tarjas tp_tarja_medicamento, 
+    MAP MEMBER FUNCTION dosagem_convertida RETURN REAL
+
+
+);
+/
+CREATE TYPE BODY tp_medicamento AS  
+MAP MEMBER FUNCTION dosagem_convertida RETURN REAL IS
+BEGIN
+    RETURN dosagem/1000;
+ END dosagem_convertida;
+END;
+/
 
 
 
@@ -173,9 +203,24 @@ CREATE TYPE tp_cirurgia AS OBJECT (
     dados_medico REf tp_medico,
     dados_enfermeiro REF tp_enfermeiro,
     dados_paciente REF tp_paciente,
-    data_cirurgia DATE
+    data_cirurgia DATE,
+    ORDER MEMBER FUNCTION conflito_cirurgia (c tp_cirurgia) RETURN INTEGER
 
 );
+/
+CREATE  TYPE BODY tp_cirurgia AS 
+ORDER MEMBER FUNCTION conflito_cirurgia (c tp_cirurgia)  RETURN INTEGER IS 
+    BEGIN 
+        IF c.data_cirurgia = data_cirurgia  AND c.dados_medico.crm = dados_medico.crm THEN 
+            RETURN 1; 
+    	ELSE 
+    		RETURN 0;
+        END IF;
+    END conflito_cirurgia;
+END;
+/
+
+
 
 CREATE TYPE tp_agenda AS OBJECT (
 
@@ -200,4 +245,11 @@ CREATE OR REPLACE TYPE tp_medico_paciente AS OBJECT (
     dados_medico REF tp_medico,
     dados_paciente REF tp_paciente,
     data_atendimento DATE
+);
+/
+CREATE OR REPLACE TYPE tp_preescreve AS OBJECT (
+    dados_medico REF tp_medico,
+    dados_medicamento REF tp_medicamento,
+    dados_paciente REF tp_paciente,
+    data_consulta DATE
 );
