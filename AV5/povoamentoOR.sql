@@ -32,6 +32,21 @@ INSERT INTO tabela_medicos VALUES (
 
 INSERT INTO tabela_medicos VALUES (
     tp_medico(
+        'Dr. André',
+        'M',
+        TO_DATE('1993-12-20', 'YYYY-MM-DD'),
+        '12345',
+        tp_endereco('BA', 'Salvador', 'Rua da Praia', 890, 'Apto 1203', '90123'),
+        tp_telefones(tp_telefone(713210987), tp_telefone(719876543)),
+        'CRM35',
+        'Cirurgião'
+    )
+);
+
+/
+
+INSERT INTO tabela_medicos VALUES (
+    tp_medico(
         'Dr. Suzana',
         'F',
         TO_DATE('1992-05-25', 'YYYY-MM-DD'),
@@ -374,6 +389,79 @@ INSERT INTO tabela_cirurgia VALUES (
         TO_DATE('2022-08-19', 'YYYY-MM-DD')
     );
 /
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50505'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
+    TO_DATE('2023-05-19', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50403'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '86723'),
+    TO_DATE('2021-08-19', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM35'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50111'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
+    TO_DATE('2020-07-24', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '51450'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '19435'),
+    TO_DATE('2021-07-19', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM35'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50403'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '72681'),
+    TO_DATE('2022-10-19', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50111'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '40579'),
+    TO_DATE('2023-01-30', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM35'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '51450'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '93642'),
+    TO_DATE('2020-11-19', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM34'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50111'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '19435'),
+    TO_DATE('2022-02-15', 'YYYY-MM-DD')
+);
+/
+
+INSERT INTO tabela_cirurgia VALUES (
+    (SELECT REF(a) FROM tabela_medicos a WHERE a.crm = 'CRM35'),
+    (SELECT REF(a) FROM tabela_enfermeiros a WHERE a.coren = '50403'),
+    (SELECT REF(p) FROM tb_paciente p WHERE p.cpf = '72681'),
+    TO_DATE('2022-01-15', 'YYYY-MM-DD')
+);
+/
+
 -- INSERINDO NA TABELA MEDICO-PACIENTE 
 
 INSERT INTO tabela_medico_paciente VALUES (
