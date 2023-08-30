@@ -28,3 +28,8 @@ END;
 SELECT e.nome AS enfermeiro, e.coren, e.endereco.cidade, e.endereco.estado
 FROM tabela_enfermeiros e
 WHERE e.endereco.estado = 'PE' AND e.endereco.cidade <> 'Recife';
+
+-- Mostra o nome e Telefone de todos os médicos emparelhado
+SELECT m.nome AS nome_medico, t.numero AS numero_telefone
+FROM tabela_medicos m
+JOIN TABLE(m.telefones) t ON 1=1;
