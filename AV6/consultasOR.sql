@@ -54,3 +54,17 @@ SELECT f.nome, f.telefone FROM tabela_funcionarios f WHERE f.sexo = 'F';
 SELECT m.nome AS nome_medico, t.numero AS numero_telefone
 FROM tabela_medicos m
 JOIN TABLE(m.telefones) t ON 1=1;
+
+--Faz uma referência dos pacientes que pesam 100 kg, e depois os que
+-- também pesam mais que 60 e os que pesam menos que 60 dessa referência.
+SELECT REF(p) 
+FROM tb_paciente p 
+WHERE p.prontuario.altura < 1.80;
+
+SELECT DEREF(REF(p)).nome 
+FROM tb_paciente p 
+where p.prontuario.altura > 1.5;
+
+SELECT DEREF(REF(p)).nome 
+FROM tb_paciente p 
+where p.prontuario.altura < 1.5;
