@@ -28,3 +28,24 @@ END;
 SELECT e.nome AS enfermeiro, e.coren, e.endereco.cidade, e.endereco.estado
 FROM tabela_enfermeiros e
 WHERE e.endereco.estado = 'PE' AND e.endereco.cidade <> 'Recife';
+
+-- Testa a order member de cirurgia para identificar conflitos nas cirurgias
+DECLARE
+    aux NUMBER;
+    cirurgia1 tp_cirurgia;
+    cirurgia2 tp_cirurgia;
+BEGIN
+    SELECT VALUE (C) INTO cirurgia1 FROM tabela_cirurgia C WHERE data_cirurgia = TO_DATE('2022-08-19', 'YYYY-MM-DD');
+    SELECT VALUE (C) INTO cirurgia2 FROM tabela_cirurgia C WHERE data_cirurgia = TO_DATE('2023-05-19', 'YYYY-MM-DD');
+    aux := cirurgia1.conflito_cirurgia(cirurgia2);
+
+    IF aux = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Não há conflito.');
+    ELSE 
+        DBMS_OUTPUT.PUT_LINE('Conflito existente!');
+    END IF;
+END;
+/
+
+-- Mostra todos os funcionários do sexo feminino
+SELECT f.nome, f.telefone FROM tabela_funcionarios f WHERE f.sexo = 'F';
