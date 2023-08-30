@@ -28,3 +28,17 @@ END;
 SELECT e.nome AS enfermeiro, e.coren, e.endereco.cidade, e.endereco.estado
 FROM tabela_enfermeiros e
 WHERE e.endereco.estado = 'PE' AND e.endereco.cidade <> 'Recife';
+
+--Faz uma referência dos pacientes que pesam 100 kg, e depois os que
+-- também pesam mais que 60 e os que pesam menos que 60 dessa referência.
+SELECT REF(p) 
+FROM tabela_pacientes p 
+WHERE p.prontuario.peso < 100;
+
+SELECT DEREF(REF(p)).nome 
+FROM tabela_pacientes p 
+where p.prontuario.peso > 60;
+
+SELECT DEREF(REF(p)).nome 
+FROM tabela_pacientes p 
+where p.prontuario.peso < 60;
