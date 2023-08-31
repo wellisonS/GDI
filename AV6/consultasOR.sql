@@ -68,3 +68,24 @@ where p.prontuario.altura > 1.5;
 SELECT DEREF(REF(p)).nome 
 FROM tb_paciente p 
 where p.prontuario.altura < 1.5;
+
+
+--Seleciona o número dos enfermeiros da nested table de telefones da tabela tb_lista_telefones.
+
+SELECT t.enfermeiro.nome AS nome_enfermeiro, f.numero AS numero_telefone
+FROM tb_lista_telefones t
+JOIN TABLE(t.lista_fone) f ON 1=1;
+
+
+-- Consulta que calcula a média das dosagens dos medicamentos armazenados na tabela tabela_medicamentos
+
+SELECT AVG(medicamento.dosagem) AS media_dosagem
+FROM tabela_medicamentos medicamento;
+
+
+--Consulta que utiliza a HAVING para filtrar medicamentos com uma dosagem média acima de um determinado valor:
+
+SELECT medicamento.nome_medicamento, AVG(medicamento.dosagem) AS media_dosagem
+FROM tabela_medicamentos medicamento
+GROUP BY medicamento.nome_medicamento
+HAVING AVG(medicamento.dosagem) > 50;
