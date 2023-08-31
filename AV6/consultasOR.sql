@@ -48,7 +48,7 @@ END;
 /
 
 -- Mostra todos os funcionários do sexo feminino
-SELECT f.nome, f.telefone FROM tabela_funcionarios f WHERE f.sexo = 'F';
+SELECT f.nome, f.telefones FROM tabela_funcionarios f WHERE f.sexo = 'F';
 
 --Mostra emparelhado o nome do médico e seu(s) telefone(s)
 SELECT m.nome AS nome_medico, t.numero AS numero_telefone
