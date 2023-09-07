@@ -1,10 +1,6 @@
-// MongoDB Playground
-// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
-
-// The current database to use.
 use('clinica');
+db.createCollection("servicos");
 
-// Create a new document in the collection.
 db.getCollection('servicos').insertMany([
     {
         "id_servico": 'ce00',
@@ -169,10 +165,9 @@ db.getCollection('servicos').insertMany([
     ]
 );
 
-// MongoDB Playground
-// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
-// Create a new document in the collection.
+db.createCollection("profissionais");
+
 db.getCollection('profissionais').insertMany([
  {
         "nome": "Pedro Luís",
@@ -236,3 +231,61 @@ db.getCollection('profissionais').insertMany([
 ]
 );
 
+db.createCollection("clientes");
+db.getCollection('clientes').insertMany([
+    {
+        "id": "c01",
+        "nome": "João da Silva",
+        "telefone": "+55 81 93456-7890",
+        "endereco": {
+            "rua": "Rua Principal, 123",
+            "cidade": "RECIFE",
+            "estado": "PERNAMBUCO",
+            "cep": "12345-678"
+        }
+    },
+    {
+        "id": "c02",
+        "nome": "Maria Oliveira",
+        "telefone": "+55 81 98765 4210",
+        "endereco": {
+            "rua": "Rua aurora, 124",
+            "cidade": "RECIFE",
+            "estado": "PERNAMBUCO",
+            "cep": "12345-678"
+        }
+    },
+    {
+        "id": "c03",
+        "nome": "Carlos Santos",
+        "telefone": "+55 81 11122 3333",
+        "endereco": {
+            "rua": "Rua setubal, 125",
+            "cidade": "RECIFE",
+            "estado": "PERNAMBUCO",
+            "cep": "12345-678"
+        }
+    },
+    {
+        "id": "c04",
+        "nome": "Ana Ferreira",
+        "telefone": "+55 81 55555 5555",
+        "endereco": {
+            "rua": "Rua Soledade, 126",
+            "cidade": "RECIFE",
+            "estado": "PERNAMBUCO",
+            "cep": "12345-678"
+        }
+    },
+    {
+        "id": "c05",
+        "nome": "Rafaela Silva",
+        "telefone": "+55 81 77788 9999",
+        "endereco": {
+            "rua": "Rua da Moeda, 127",
+            "cidade": "RECIFE",
+            "estado": "PERNAMBUCO",
+            "cep": "12345-678"
+        }
+    }    
+]);
