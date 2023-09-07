@@ -205,7 +205,7 @@ db.getCollection('profissionais').insertMany([
             db.servicos.findOne({id_servico: "ce17"})._id, 
             db.servicos.findOne({id_servico: "ce19"})._id
         ],
-        "id_profissional": "pr01"
+        "id_profissional": "pr04"
     },
     {
         "nome": "Mariana Santos",
@@ -289,3 +289,43 @@ db.getCollection('clientes').insertMany([
         }
     }    
 ]);
+
+
+db.createCollection("agendamento");
+
+db.getCollection('agendamento').insertOne({
+    'servicos': db.servicos.findOne({id_servico: "ce19"})._id,
+    'profissional': db.profissionais.findOne({id_profissional: "pr04"})._id,
+    'cliente': db.clientes.findOne({id: "c01"})._id,
+    'data': '07/08/2023'
+});
+
+db.getCollection('agendamento').insertOne({
+    'servicos': db.servicos.findOne({id_servico: "ce14"})._id,
+    'profissional': db.profissionais.findOne({id_profissional: "pr03"})._id,
+    'cliente': db.clientes.findOne({id: "c02"})._id,
+    'data': '06/11/2023'
+});
+
+
+db.getCollection('agendamento').insertOne({
+    'servicos': db.servicos.findOne({id_servico: "ce00"})._id,
+    'profissional': db.profissionais.findOne({id_profissional: "pr00"})._id,
+    'cliente': db.clientes.findOne({id: "c03"})._id,
+    'data': '12/10/2023'
+});
+
+db.getCollection('agendamento').insertOne({
+    'servicos': db.servicos.findOne({id_servico: "ce01"})._id,
+    'profissional': db.profissionais.findOne({id_profissional: "pr01"})._id,
+    'cliente': db.clientes.findOne({id: "c04"})._id,
+    'data': '10/01/2023'
+});
+
+db.getCollection('agendamento').insertOne({
+    'servicos': db.servicos.findOne({id_servico: "ce12"})._id,
+    'profissional': db.profissionais.findOne({id_profissional: "pr02"})._id,
+    'cliente': db.clientes.findOne({id: "c05"})._id,
+    'data': '21/03/2023'
+});
+
