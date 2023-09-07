@@ -168,3 +168,71 @@ db.getCollection('servicos').insertMany([
     }
     ]
 );
+
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Create a new document in the collection.
+db.getCollection('profissionais').insertMany([
+ {
+        "nome": "Pedro Luís",
+        "area": "massagista",
+        "salario": 2500.00,
+        "servicos": [
+            db.servicos.findOne({id_servico: "ce00"})._id, 
+            db.servicos.findOne({id_servico: "ce06"})._id, 
+            db.servicos.findOne({id_servico: "ce08"})._id
+        ],
+        "id_profissional": "pr00"
+    },
+    {
+        "nome": "Ana Silva",
+        "area": "Dermatologista",
+        "salario": 15000.00,
+        "servicos": [
+            db.servicos.findOne({id_servico: "ce01"})._id, 
+            db.servicos.findOne({id_servico: "ce02"})._id, 
+            db.servicos.findOne({id_servico: "ce03"})._id, 
+            db.servicos.findOne({id_servico: "ce04"})._id, 
+            db.servicos.findOne({id_servico: "ce05"})._id
+        ],
+        "id_profissional": "pr01"
+    },
+    {
+        "nome": "Paula Pimentel",
+        "area": "Dermatologista",
+        "salario": 13000.00,
+        "servicos": [
+            db.servicos.findOne({id_servico: "ce07"})._id, 
+            db.servicos.findOne({id_servico: "ce09"})._id, 
+            db.servicos.findOne({id_servico: "ce11"})._id, 
+            db.servicos.findOne({id_servico: "ce15"})._id, 
+            db.servicos.findOne({id_servico: "ce17"})._id, 
+            db.servicos.findOne({id_servico: "ce19"})._id
+        ],
+        "id_profissional": "pr01"
+    },
+    {
+        "nome": "Mariana Santos",
+        "area": "Maquiadora",
+        "salario": 3000.00,
+        "servicos": [
+            db.servicos.findOne({id_servico: "ce12"})._id, 
+            db.servicos.findOne({id_servico: "ce16"})._id,  
+            db.servicos.findOne({id_servico: "ce18"})._id
+        ],
+        "id_profissional": "pr02"
+    },
+    {
+    "nome": "Julia Fernandes",
+    "area": "Manicure/pedicure",
+    "salario": 2900.00,
+    "servicos": [
+        db.servicos.findOne({id_servico: "ce10"})._id,
+        db.servicos.findOne({id_servico: "ce14"})._id
+    ],
+    "id_profissional": "pr03"
+}
+]
+);
+
