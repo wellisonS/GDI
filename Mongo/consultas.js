@@ -13,11 +13,11 @@ db.profissionais.find({
 //retorna o total gasto em servicos por uma cliente
 // define o id da cliente pelo nome
 var clienteId = db.clientes.findOne({ "nome": "Maria Oliveira" })._id;
-var agendamentos = db.agendamento.find({ "cliente": clienteId });
+var agendamentos = db.agendamentos.find({ "cliente": clienteId });
 var totalGasto = 0;
 
-agendamentos.forEach(function (agendamento) {
-    var servico = db.servicos.findOne({ "_id": agendamento.servicos });
+agendamentos.forEach(function (agendamentos) {
+    var servico = db.servicos.findOne({ "_id": agendamentos.servicos });
     totalGasto += servico.preco;
 });
 
@@ -27,7 +27,7 @@ totalGasto
 // retorna as informacoes dos agendamentos de uma cliente
 var clienteId = db.clientes.findOne({ "nome": "Ana Ferreira" })._id;
 
-db.agendamento.aggregate([
+db.agendamentos.aggregate([
     {
         $match: {
             cliente: clienteId // Filtra os agendamentos pelo ID do cliente
@@ -105,11 +105,6 @@ db.profissionais.aggregate([
     { $sort: {numServicos:-1, salario: -1}}
 ]).pretty();
 //-----------------------------------------------------------------------------
-//Retorna um profissional com id pr04 (ainda falta ajeitar)
-db.profissionais.find({$where: function(){
-    return (this.id_profissional == "pr04")
-}}).pretty();
-//-----------------------------------------------------------------------------
 // Retona os profissionais que realizam determinados serviços
 db.profissionais.find({servicos: {$all: [
     db.servicos.findOne({id_servico: "ce02"})._id,
@@ -143,28 +138,59 @@ db.servicos.find({preco:{$lt: 200}}).limit(5).pretty();
 db.servicos.createIndex({ categoria: "text" }); 
 db.servicos.find( { $text: { $search: "Massagem"} } ).pretty();
 //-----------------------------------------------------------------------------
-//Aplica 25% de desconto em serviços especificos
+//Aplica 25% de desconto em  um serviço especifico
 db.servicos.aggregate([
     { 
         $project: {
         nome: 1,
         preco: '$preco',
-        promocao: {$cond: {if: {$in: ["$id_servico", ["ce01","ce05","ce08","ce09"]]},then: { $multiply: [ "$preco", 0.75 ] } , else: 'Promoção Indisponivel' }},
+        promocao: {$cond: {if: {$in: ["$id_servico", ["ce01"]]},then: { $multiply: [ "$preco", 0.75 ] } , else: 'Promoção Indisponivel' }},
         _id: 0
         }
     }
 ]).pretty();
+
 //-----------------------------------------------------------------------------
-//Salva um novo serviço de 
-db.servicos.find( {id_servico: "ce20"});
-db.servicos.save({
-    "id_servico": "ce20",
-    "nome": "Depilação",
-    "descricao": "Depilação com cera",
-    "categoria": "Estética",
-    "duracao_minutos": 30,
-    "preco": 40
-});
-db.servicos.find( {id_servico: "ce20"});
+//Retorna um profissional com id pr04 
+db.profissionais.find({$where: function(){
+    return (this.id_profissional == "pr04")
+}}).pretty();
 
+//-----------------------------------------------------------------------------
+db.profissionais.mapReduce(
+    function() { emit( this.categoria, this.salario ); },
+    function(key, values) { return Array.sum(values); },
+    {   
+        query: { servicos:{$not: {$size:4} }},
+        out: "mapReduce"
+    }
+);
+db.mapReduce.find().pretty();
+//-----------------------------------------------------------------------------
 
+//Estabelece um outer join entre profissionais e servicos e utiliza isso para mostrar quais servicos de cada medico tem plano
+db.profissionais.aggregate([
+    {
+        $lookup: {
+            from: "servicos",
+            localField: "servicos",
+            foreignField: "_id",
+            as: "servicos_info"
+        }
+    },
+
+    {
+        $project: {
+            _id:0,
+            nome: 1,
+            area: 1,
+            servicosPlano:{
+                $filter: {
+                    input: "$servicos_info",
+                    as: "servico",
+                    cond: {$eq: ["$$servico.categoria", "Dermatologia"]}
+                }
+            }
+        }
+    }
+]).pretty();

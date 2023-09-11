@@ -14,7 +14,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce01",
         "nome": "Limpeza de Pele Profunda",
         "descricao": "Uma limpeza facial profunda para uma pele radiante...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 90,
         "preco": 120.00
     },
@@ -22,7 +22,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce02",
         "nome": "Tratamento de Celulite",
         "descricao": "Um tratamento eficaz para redução de celulite...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 120,
         "preco": 150.00
     },
@@ -62,7 +62,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce07",
         "nome": "Peeling Químico",
         "descricao": "Renove sua pele com um peeling químico...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 45,
         "preco": 130.00
     },
@@ -78,7 +78,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce09",
         "nome": "Tratamento Facial Anti-Idade",
         "descricao": "Reduza sinais de envelhecimento com tratamento facial...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 120,
         "preco": 220.00
     },
@@ -94,7 +94,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce11",
         "nome": "Drenagem Linfática",
         "descricao": "Melhore a circulação e reduza inchaços com drenagem...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 75,
         "preco": 110.00
     },
@@ -126,7 +126,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce15",
         "nome": "Tratamento de Acne",
         "descricao": "Reduza a acne com um tratamento especializado...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 90,
         "preco": 140.00
     },
@@ -142,7 +142,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce17",
         "nome": "Tratamento de Estrias",
         "descricao": "Reduza a aparência de estrias com tratamento especializado...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 90,
         "preco": 160.00
     },
@@ -158,7 +158,7 @@ db.getCollection('servicos').insertMany([
         "id_servico": "ce19",
         "nome": "Tratamento Capilar",
         "descricao": "Revitalize seu cabelo com um tratamento capilar...",
-        "categoria": "Estética",
+        "categoria": "Dermatologia",
         "duracao_minutos": 90,
         "preco": 120.00
     }
