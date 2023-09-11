@@ -151,24 +151,8 @@ db.servicos.aggregate([
 ]).pretty();
 
 //-----------------------------------------------------------------------------
-//Retorna um profissional com id pr04 
-db.profissionais.find({$where: function(){
-    return (this.id_profissional == "pr04")
-}}).pretty();
 
-//-----------------------------------------------------------------------------
-db.profissionais.mapReduce(
-    function() { emit( this.categoria, this.salario ); },
-    function(key, values) { return Array.sum(values); },
-    {   
-        query: { servicos:{$not: {$size:4} }},
-        out: "mapReduce"
-    }
-);
-db.mapReduce.find().pretty();
-//-----------------------------------------------------------------------------
-
-//Estabelece um outer join entre profissionais e servicos e utiliza isso para mostrar quais servicos de cada medico tem plano
+//Estabelece um outer join entre profissionais e servicos e utiliza isso para mostrar os serviços que são da categoria Dermatologia
 db.profissionais.aggregate([
     {
         $lookup: {
@@ -194,3 +178,26 @@ db.profissionais.aggregate([
         }
     }
 ]).pretty();
+
+//-----------------------------------------------------------------------------
+
+//Retorna um profissional com id pr04 
+db.profissionais.find({$where: function(){
+    return (this.id_profissional == "pr04")
+}}).pretty();
+
+//-----------------------------------------------------------------------------
+db.profissionais.mapReduce(
+    function() { emit( this.categoria, this.salario ); },
+    function(key, values) { return Array.sum(values); },
+    {   
+        query: { servicos:{$not: {$size:4} }},
+        out: "mapReduce"
+    }
+);
+db.mapReduce.find().pretty();
+//-----------------------------------------------------------------------------
+
+
+
+
