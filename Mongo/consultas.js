@@ -70,12 +70,12 @@ db.agendamento.aggregate([
     }
 ])
 
-
+//-----------------------------------------------------------------------------
 
 // Retorna a quantidade de documentos em serviços
 db.servicos.count();
 
-
+//-----------------------------------------------------------------------------
 
 // Retorna todos os agendamentos 
 db.agendamentos.find().pretty();
@@ -85,13 +85,13 @@ db.profissionais.update(
     {id_profissional: "pr00"},
     {$set: {"salario": 3000}}
   )
-
+//-----------------------------------------------------------------------------
 //  Adiciona o serviço de Peeling Quimico a profissinal Ana Silva
 db.profissionais.updateOne(
     {id_profissional: "pr01"},
     {$addToSet: {"servicos": db.servicos.findOne({id_servico: "ce07"})._id}}
 );
-
+//-----------------------------------------------------------------------------
 //Retorna os Funcionários e quantidade de serviços que eles fazem 
 db.profissionais.aggregate([
     {
@@ -104,18 +104,18 @@ db.profissionais.aggregate([
     },
     { $sort: {numServicos:-1, salario: -1}}
 ]).pretty();
-
+//-----------------------------------------------------------------------------
 //Retorna um profissional com id pr04 (ainda falta ajeitar)
 db.profissionais.find({$where: function(){
     return (this.id_profissional == "pr04")
 }}).pretty();
-
+//-----------------------------------------------------------------------------
 // Retona os profissionais que realizam determinados serviços
 db.profissionais.find({servicos: {$all: [
     db.servicos.findOne({id_servico: "ce02"})._id,
     db.servicos.findOne({id_servico: "ce07"})._id
 ]}}).pretty();
-
+//-----------------------------------------------------------------------------
 //Agrega os profissionais por area, e retona o salário mais alto, o salário médio e o mais baixo, bem como o qunato que cada área rende
 db.profissionais.aggregate([
     {
@@ -129,18 +129,20 @@ db.profissionais.aggregate([
         }
     }
 ]).pretty();
+//-----------------------------------------------------------------------------
 // Ordena os serviços por preço
 db.servicos.find().sort({salario: -1}).pretty();
-
+//-----------------------------------------------------------------------------
 // Mostra os profissionais que ganham mais que 5000
 db.profissionais.find({salario: {$gte: 5000 }}).pretty();
+//-----------------------------------------------------------------------------
 // Retorna os 5 serviços que custam menos que R$ 200
 db.servicos.find({preco:{$lt: 200}}).limit(5).pretty();
-
+//-----------------------------------------------------------------------------
 // Retorna todos os serviços que são massagem
 db.servicos.createIndex({ categoria: "text" }); 
 db.servicos.find( { $text: { $search: "Massagem"} } ).pretty();
-
+//-----------------------------------------------------------------------------
 //Aplica 25% de desconto em serviços especificos
 db.servicos.aggregate([
     { 
@@ -152,7 +154,7 @@ db.servicos.aggregate([
         }
     }
 ]).pretty();
-
+//-----------------------------------------------------------------------------
 //Salva um novo serviço de 
 db.servicos.find( {id_servico: "ce20"});
 db.servicos.save({
