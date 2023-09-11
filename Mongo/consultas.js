@@ -60,7 +60,7 @@ db.profissionais.aggregate([
 ]).pretty();
 //-----------------------------------------------------------------------------
 // Ordena os serviços por preço
-db.servicos.find().sort({salario: -1}).pretty();
+db.servicos.find().sort({preco: 1}).pretty();
 //-----------------------------------------------------------------------------
 // Mostra os profissionais que ganham mais que 5000
 db.profissionais.find({salario: {$gte: 5000 }}).pretty();
