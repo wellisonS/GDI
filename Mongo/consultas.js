@@ -1,3 +1,8 @@
+
+// Muda o nome da coleção de "agendamento" para "agendamentos". DEVE SER O PRIMEIRO A SER RODADO
+db.agendamento.renameCollection("agendamentos");
+
+
 //nome de profissionais que oferecem um servico especifico
 db.profissionais.find({
     "servicos": db.servicos.findOne({ "nome": "Limpeza de Pele Profunda" })._id
@@ -70,8 +75,7 @@ db.agendamento.aggregate([
 // Retorna a quantidade de documentos em serviços
 db.servicos.count();
 
-// Muda o nome da coleção de "agendamento" para "agendamentos"
-db.agendamento.renameCollection("agendamentos");
+
 
 // Retorna todos os agendamentos 
 db.agendamentos.find().pretty();
@@ -87,3 +91,49 @@ db.profissionais.updateOne(
     {id_profissional: "pr01"},
     {$addToSet: {"servicos": db.servicos.findOne({id_servico: "ce07"})._id}}
 );
+
+//Retorna os Funcionários e quantidade de serviços que eles fazem 
+db.profissionais.aggregate([
+    {
+        $project:{
+            nome: 1,
+            salario: "$salario",
+            numServicos: {$size: "$servicos"},
+            _id: 0
+        }
+    },
+    { $sort: {numServicos:-1, salario: -1}}
+]).pretty();
+
+//Retorna um profissional com id pr04 (ainda falta ajeitar)
+db.profissionais.find({$where: function(){
+    return (this.id_profissional == "pr04")
+}}).pretty();
+
+// Retona os profissionais que realizam determinados serviços
+db.profissionais.find({servicos: {$all: [
+    db.servicos.findOne({id_servico: "ce02"})._id,
+    db.servicos.findOne({id_servico: "ce07"})._id
+]}}).pretty();
+
+//Agrega os profissionais por area, e retona o salário mais alto, o salário médio e o mais baixo, bem como o qunato que cada área rende
+db.profissionais.aggregate([
+    {
+        $group: {
+            _id: "$area",
+            salario_maximo: {$max: "$salario"},
+            salario_medio: {$avg: "$salario"},
+            salario_menor: {$min: "$salario"},
+            salario_total: {$sum: "$salario"}
+
+        }
+    }
+]).pretty();
+// Ordena os serviços por preço
+db.servicos.find().sort({salario: -1}).pretty();
+
+// Mostra os profissionais que ganham mais que 5000
+db.profissionais.find({salario: {$gte: 5000 }}).pretty();
+// Retorna os 5 serviços que custam menos que R$ 200
+db.servicos.find({preco:{$lt: 200}}).limit(5).pretty();
+
