@@ -67,3 +67,23 @@ db.agendamento.aggregate([
 
 
 
+// Retorna a quantidade de documentos em serviços
+db.servicos.count();
+
+// Muda o nome da coleção de "agendamento" para "agendamentos"
+db.agendamento.renameCollection("agendamentos");
+
+// Retorna todos os agendamentos 
+db.agendamentos.find().pretty();
+
+// Altera o salário do massagista
+db.profissionais.update(
+    {id_profissional: "pr00"},
+    {$set: {"salario": 3000}}
+  )
+
+//  Adiciona o serviço de Peeling Quimico a profissinal Ana Silva
+db.profissionais.updateOne(
+    {id_profissional: "pr01"},
+    {$addToSet: {"servicos": db.servicos.findOne({id_servico: "ce07"})._id}}
+);
