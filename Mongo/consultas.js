@@ -153,4 +153,16 @@ db.servicos.aggregate([
     }
 ]).pretty();
 
+//Salva um novo serviço de 
+db.servicos.find( {id_servico: "ce20"});
+db.servicos.save({
+    "id_servico": "ce20",
+    "nome": "Depilação",
+    "descricao": "Depilação com cera",
+    "categoria": "Estética",
+    "duracao_minutos": 30,
+    "preco": 40
+});
+db.servicos.find( {id_servico: "ce20"});
+
 
