@@ -16,7 +16,8 @@ db.getCollection('servicos').insertMany([
         "descricao": "Uma limpeza facial profunda para uma pele radiante...",
         "categoria": "Dermatologia",
         "duracao_minutos": 90,
-        "preco": 120.00
+        "preco": 120.00,
+        "plano_saude" : "sim"
     },
     {
         "id_servico": "ce02",
@@ -24,7 +25,8 @@ db.getCollection('servicos').insertMany([
         "descricao": "Um tratamento eficaz para redução de celulite...",
         "categoria": "Dermatologia",
         "duracao_minutos": 120,
-        "preco": 150.00
+        "preco": 150.00,
+        "plano_saude" : "sim"
     },
     {
         "id_servico": "ce03",
@@ -32,7 +34,8 @@ db.getCollection('servicos').insertMany([
         "descricao": "Remova os pelos indesejados com depilação a laser...",
         "categoria": "Estética",
         "duracao_minutos": 60,
-        "preco": 200.00
+        "preco": 200.00,
+         
     },
     {
         "id_servico": "ce04",
@@ -56,7 +59,8 @@ db.getCollection('servicos').insertMany([
         "descricao": "Tratamento corporal para melhorar a circulação...",
         "categoria": "Estética",
         "duracao_minutos": 90,
-        "preco": 140.00
+        "preco": 140.00,
+        "plano_saude": "sim"
     },
     {
         "id_servico": "ce07",
@@ -96,7 +100,8 @@ db.getCollection('servicos').insertMany([
         "descricao": "Melhore a circulação e reduza inchaços com drenagem...",
         "categoria": "Dermatologia",
         "duracao_minutos": 75,
-        "preco": 110.00
+        "preco": 110.00,
+        "plano_saude": "sim"
     },
     {
         "id_servico": "ce12",

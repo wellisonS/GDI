@@ -186,18 +186,27 @@ db.profissionais.find({$where: function(){
     return (this.id_profissional == "pr04")
 }}).pretty();
 
+
 //-----------------------------------------------------------------------------
+var mapFunction1 = function() {
+    emit(this.area, this.salario);
+ };
+ var reduceFunction1 = function(keyCustId, valuesPrices) {
+    return Array.sum(valuesPrices);
+ };
+
 db.profissionais.mapReduce(
-    function() { emit( this.categoria, this.salario ); },
-    function(key, values) { return Array.sum(values); },
-    {   
-        query: { servicos:{$not: {$size:4} }},
-        out: "mapReduce"
+    mapFunction1,
+    reduceFunction1,
+    {
+        out: "mapReducee"
     }
 );
-db.mapReduce.find().pretty();
-//-----------------------------------------------------------------------------
+db.mapReducee.find();
 
+//-----------------------------------------------------------------------------
+//Retorna os serviços que podem ser cobertos por plano de saúde
+db.servicos.find({plano_saude : {$exists: true}}).pretty();
 
 
 
