@@ -137,3 +137,20 @@ db.profissionais.find({salario: {$gte: 5000 }}).pretty();
 // Retorna os 5 serviços que custam menos que R$ 200
 db.servicos.find({preco:{$lt: 200}}).limit(5).pretty();
 
+// Retorna todos os serviços que são massagem
+db.servicos.createIndex({ categoria: "text" }); 
+db.servicos.find( { $text: { $search: "Massagem"} } ).pretty();
+
+//Aplica 25% de desconto em serviços especificos
+db.servicos.aggregate([
+    { 
+        $project: {
+        nome: 1,
+        preco: '$preco',
+        promocao: {$cond: {if: {$in: ["$id_servico", ["ce01","ce05","ce08","ce09"]]},then: { $multiply: [ "$preco", 0.75 ] } , else: 'Promoção Indisponivel' }},
+        _id: 0
+        }
+    }
+]).pretty();
+
+
