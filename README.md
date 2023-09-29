@@ -22,13 +22,8 @@ Este projeto tem como objetivo fornecer uma solução de banco de dados abrangen
 1. Coleções MongoDB: O projeto utiliza coleções no MongoDB para armazenar informações sobre clientes, agendamentos de serviços, produtos disponíveis, funcionários e muito mais.
 2. Agendamento de Serviços: Os clientes podem agendar serviços de estética, como massagens, tratamentos faciais e corporais, através da interface da clínica.
 3. Controle de Clientes: O banco de dados armazena informações detalhadas sobre os clientes, incluindo histórico de serviços, preferências e informações de contato.
-## Contribuição
-
-Se você deseja contribuir para este projeto, fique à vontade para abrir um problema, enviar uma solicitação de pull request ou sugerir melhorias. Sua contribuição é muito bem-vinda!
 
 ---
-
-Esperamos que estes projetos de banco de dados sejam úteis para melhorar a eficiência e a gestão de informações em instituições. Se você tiver alguma dúvida ou precisar de suporte, não hesite em entrar em contato.
 
 **Equipe de Desenvolvimento**
 
