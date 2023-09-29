@@ -1,7 +1,7 @@
 # GDI Grupo 5 
-  # Projeto de Banco de Dados Hospitalar
+  # Projeto de Banco de Dados Hospitalar e Clícina estética
 
-<h1>Este repositório contém um projeto completo e robusto de banco de dados hospitalar, desenvolvido utilizando SQL, PL/SQL e Oracle SQL. O objetivo deste sistema é gerenciar informações críticas para o funcionamento eficiente de uma instituição hospitalar, incluindo o registro de pacientes, agendamento de consultas, informações médicas, e um projeto completo de banco de dados para gerenciamento de uma clínica de estética, desenvolvido usando o MongoDB, um banco de dados NoSQL amplamente utilizado.</h1>
+<p>Este repositório contém um projeto completo e robusto de banco de dados hospitalar, desenvolvido utilizando SQL, PL/SQL e Oracle SQL. O objetivo deste sistema é gerenciar informações críticas para o funcionamento eficiente de uma instituição hospitalar, incluindo o registro de pacientes, agendamento de consultas, informações médicas, e um projeto completo de banco de dados para gerenciamento de uma clínica de estética, desenvolvido usando o MongoDB, um banco de dados NoSQL amplamente utilizado.</p>
 
 <h2>Visão Geral</h2>
 
