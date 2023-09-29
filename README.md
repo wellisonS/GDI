@@ -31,6 +31,7 @@ Se você deseja contribuir para este projeto, fique à vontade para abrir um pro
 Esperamos que estes projetos de banco de dados sejam úteis para melhorar a eficiência e a gestão de informações em instituições. Se você tiver alguma dúvida ou precisar de suporte, não hesite em entrar em contato.
 
 **Equipe de Desenvolvimento**
+
 [Carlos Clark](https://github.com/cemc-git)  
 [Edvyn Luiz](https://github.com/edzs7)    
 [Isaac Ferreira](https://github.com/ifs55) 
